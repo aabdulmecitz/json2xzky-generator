@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text2Beluga Web Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Overlay for selecting scenario & starting simulation cleanly -->
+    <div id="start-overlay" class="overlay">
+        <div class="overlay-modal">
+            <h2>Text2Beluga Simulator</h2>
+            <p>Select your scenario JSON to begin the 1080x1920 real-time simulation.</p>
+            <input type="file" id="scenario-input" accept=".json" />
+            
+            <button id="start-btn" disabled>Start Simulator (Fullscreen)</button>
+            <p class="subtext">This will enter fullscreen and hide all UI clutter for clean OBS capturing.</p>
+        </div>
+    </div>
+
+    <!-- Wrapper that enforces aspect ratio and handles alignment -->
+    <div id="viewport-wrapper">
+        <!-- Main Chat Window (Discord 2026 Style) -->
+        <div id="discord-app">
+            <!-- Chat Area -->
+            <main class="chat-container" id="chat-container">
+                <div id="messages-list">
+                    <!-- Messages will be injected here dynamically -->
+                </div>
+                
+                <!-- Typing Indicator (appears beneath messages when someone is typing) -->
+                <div id="typing-indicator" class="hidden">
+                    <div class="dots">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span id="typing-text">Someone is typing...</span>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Audio Player Handles via JS -->
+    <script src="app.js"></script>
+</body>
+</html>
