@@ -6,7 +6,7 @@ let audioCtx = null;
 let currentTypingSource = null;
 
 let appConfig = {
-    serverName: "Text2Beluga Server",
+    serverName: "json2xzky Server",
     channelName: "general",
     use24HourClock: false
 };
@@ -413,6 +413,16 @@ async function runSimulation() {
                         }
                     }));
                 }
+            }
+
+            // Sequential Reveal Hook
+            if (entry.crop_mode === 'sequential_reveal') {
+                console.log(JSON.stringify({
+                    type: "REVEAL_TIMESTAMP",
+                    msg_id: entry.id,
+                    group_id: entry.reveal_group_id,
+                    timestamp: (Date.now() - simulationStartTime) / 1000
+                }));
             }
         
         // 3. Message Mutations

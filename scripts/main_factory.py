@@ -122,6 +122,8 @@ def parse_text_to_json(text_file: str, output_json: str | None = None) -> list:
         print(f"[BRAIN] ⚠️  Ollama error ({e}) — falling back to legacy parser")
         scenario = _legacy_parse(raw_text)
 
+    scenario = _apply_sequential_reveal_groups(scenario)
+
     # Write output
     if output_json is None:
         output_json = str(text_path.with_suffix(".json"))
@@ -212,6 +214,40 @@ def _legacy_parse(raw_text: str) -> list:
     print(f"[BRAIN] ✅ Legacy parser produced {len(entries)} entries")
     return entries
 
+
+def _apply_sequential_reveal_groups(scenario: list) -> list:
+    """
+    Scans the scenario for consecutive 'message' actions by the same user.
+    If 3 or more are found consecutively (ignoring typing/delays in between),
+    group them into a 'sequential_reveal' crop_mode.
+    """
+    current_user = None
+    group_indices = []
+    group_counter = 1
+    
+    def process_group(indices, group_id):
+        if len(indices) >= 3:
+            for i in indices:
+                scenario[i]["crop_mode"] = "sequential_reveal"
+                scenario[i]["reveal_group_id"] = group_id
+    
+    for i, entry in enumerate(scenario):
+        if entry.get("action") in ["message", "send_message", "reply", "send_attachment"]:
+            user = entry.get("user_id")
+            if user == current_user:
+                group_indices.append(i)
+            else:
+                if group_indices:
+                    process_group(group_indices, group_counter)
+                    if len(group_indices) >= 3:
+                        group_counter += 1
+                current_user = user
+                group_indices = [i]
+                
+    if group_indices:
+        process_group(group_indices, group_counter)
+        
+    return scenario
 
 # ═══════════════════════════════════════════════════════════════════════════
 # 2. THE FETCHER — MyInstants Dynamic Audio Scraper
@@ -344,6 +380,7 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
 
     audio_timeline: list[dict] = []
     camera_cues: list[dict] = []
+    reveal_cues: list[dict] = []
 
     # Start a simple HTTP server for the web_player directory
     class QuietHandler(http.server.SimpleHTTPRequestHandler):
@@ -382,6 +419,8 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
                     })
                 elif data.get("type") == "ZOOM_CUE":
                     camera_cues.append(data)
+                elif data.get("type") == "REVEAL_TIMESTAMP":
+                    reveal_cues.append(data)
             except (json.JSONDecodeError, KeyError):
                 pass
 
@@ -438,6 +477,99 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
                 else:
                     print(f"[ACTOR]   ⚠️  msg_{msg_id} not found in DOM")
 
+        # ── Pass 2: Sequential Reveal High-Res Screenshots ──────
+        if reveal_cues:
+            print(f"[ACTOR] 📸 Capturing Sequential Reveals (Pass 2 - Scale 3.0)...")
+            
+            groups = {}
+            for cue in reveal_cues:
+                groups.setdefault(cue["group_id"], []).append(cue)
+                
+            context2 = browser.new_context(
+                viewport={"width": 1080, "height": 1920},
+                device_scale_factor=3.0
+            )
+            page2 = context2.new_page()
+            page2.goto(url, wait_until="networkidle")
+            
+            page2.evaluate(f"""
+                scenarioEntries = {scenario_data};
+                const overlay = document.getElementById('start-overlay');
+                if (overlay) overlay.remove();
+                document.body.classList.add('recording-mode');
+                document.body.classList.add('instant-mode');
+                isInstant = true;
+                runSimulation();
+            """)
+            page2.wait_for_timeout(1000) 
+            
+            # Wait for any avatars/images to finish loading so they don't clip out
+            page2.evaluate("""
+                () => new Promise(resolve => {
+                    if (document.images.length === 0) resolve();
+                    let loaded = 0;
+                    for (let img of document.images) {
+                        if (img.complete) loaded++;
+                        else img.addEventListener('load', () => { loaded++; if (loaded === document.images.length) resolve(); });
+                        img.addEventListener('error', () => { loaded++; if (loaded === document.images.length) resolve(); });
+                    }
+                    if (loaded >= document.images.length) resolve();
+                })
+            """)
+            
+            for gid, group_cues in groups.items():
+                msg_ids = [c["msg_id"] for c in group_cues]
+                for step_idx in range(len(msg_ids)):
+                    page2.evaluate(f"""
+                        var hideIds = {msg_ids};
+                        for (var i=0; i<hideIds.length; i++) {{
+                            var el = document.getElementById('msg_' + hideIds[i]);
+                            if (el) {{
+                                el.style.display = (i <= {step_idx}) ? 'flex' : 'none';
+                            }}
+                        }}
+                    """)
+                    page2.wait_for_timeout(100) 
+                    
+                    bbox = page2.evaluate(f"""
+                        (function() {{
+                            var ids = {msg_ids};
+                            var minX = 99999, minY = 99999, maxX = 0, maxY = 0;
+                            var found = false;
+                            for (var i=0; i<ids.length; i++) {{
+                                if (i > {step_idx}) continue;
+                                var el = document.getElementById('msg_' + ids[i]);
+                                if (el) {{
+                                    found = true;
+                                    var r = el.getBoundingClientRect();
+                                    if (r.x < minX) minX = r.x;
+                                    if (r.y < minY) minY = r.y;
+                                    if (r.x+r.width > maxX) maxX = r.x+r.width;
+                                    if (r.y+r.height > maxY) maxY = r.y+r.height;
+                                }}
+                            }}
+                            if (!found) return null;
+                            return {{x: minX, y: minY, width: maxX-minX, height: maxY-minY}};
+                        }})()
+                    """)
+                    
+                    if bbox:
+                        pad = 20
+                        clip = {
+                            "x": max(0, bbox["x"] - pad),
+                            "y": max(0, bbox["y"] - pad),
+                            "width": bbox["width"] + pad*2,
+                            "height": bbox["height"] + pad*2
+                        }
+                        
+                        shot_name = f"reveal_g{gid}_step{step_idx}.png"
+                        shot_path = ZOOMS_DIR / shot_name
+                        page2.screenshot(path=str(shot_path), clip=clip)
+                        group_cues[step_idx]["screenshot"] = str(shot_path)
+                        print(f"[ACTOR]   📷 reveal_g{gid}_step{step_idx} → {shot_name}")
+            
+            context2.close()
+
         # Close to save the video
         page.close()
         context.close()
@@ -476,9 +608,15 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
     cues_path = OUTPUT_DIR / "camera_cues.json"
     cues_path.write_text(json.dumps(camera_cues, indent=2), encoding="utf-8")
     print(f"[ACTOR] 📐 Camera cues: {cues_path}  ({len(camera_cues)} zoom cues)")
+    
+    # Save reveal cues
+    reveal_path = OUTPUT_DIR / "reveal_cues.json"
+    reveal_path.write_text(json.dumps(reveal_cues, indent=2), encoding="utf-8")
+    print(f"[ACTOR] 🌠 Reveal cues: {reveal_path}  ({len(reveal_cues)} sequential reveal steps)")
+    
     print(f"[ACTOR] 🎥 Raw video: {final_raw}")
 
-    return str(final_raw), audio_timeline, camera_cues
+    return str(final_raw), audio_timeline, camera_cues, reveal_cues
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -489,6 +627,7 @@ def mux_audio_video(
     raw_video: str = None,
     audio_timeline: list[dict] = None,
     camera_cues: list[dict] = None,
+    reveal_cues: list[dict] = None,
 ) -> str:
     """
     Layer all audio events at their exact timestamps over the silent video.
@@ -519,6 +658,14 @@ def mux_audio_video(
     if camera_cues:
         print(f"[MUXER] 🎯 Applying {len(camera_cues)} Beluga Camera zoom cuts...")
         zoomed_video = _apply_zoom_crops(raw_video, camera_cues)
+        
+    # ── Step A2: Apply sequential reveals ────────────────────────────────
+    if reveal_cues:
+        # Check if the screenshots exist
+        valid_reveals = [c for c in reveal_cues if "screenshot" in c and Path(c["screenshot"]).exists()]
+        if valid_reveals:
+            print(f"[MUXER] 🎯 Applying {len(valid_reveals)} Sequential Reveal edits...")
+            zoomed_video = _apply_sequential_reveals(zoomed_video, valid_reveals)
 
     # ── Step B: Layer audio ─────────────────────────────────────────────
     # De-duplicate audio events
@@ -551,8 +698,10 @@ def mux_audio_video(
         shutil.copy2(raw_video, final)
         return final
 
-    # Add vine_thud at each zoom cue timestamp
+    # Add sounds for camera zoom cues
     vine_thud = str(SOUNDS_DIR / "vine_thud.mp3")
+    fallback_ping = str(SOUNDS_DIR / "discord_ping.mp3")
+    
     if Path(vine_thud).exists() and camera_cues:
         for cue in camera_cues:
             valid_events.append({
@@ -560,6 +709,16 @@ def mux_audio_video(
                 "timestamp": cue["timestamp"],
             })
         print(f"[MUXER] 💥 Added vine_thud at {len(camera_cues)} zoom timestamps")
+
+    # Add massive punchy sound for sequential reveal steps
+    sound_to_use = vine_thud if Path(vine_thud).exists() else fallback_ping
+    if Path(sound_to_use).exists() and reveal_cues:
+        for cue in reveal_cues:
+            valid_events.append({
+                "file": sound_to_use,
+                "timestamp": cue["timestamp"],
+            })
+        print(f"[MUXER] 🌠 Added reveal sound at {len(reveal_cues)} timestamps")
 
     print(f"[MUXER] 🎵 Layering {len(valid_events)} audio events onto video...")
 
@@ -679,6 +838,62 @@ def _apply_zoom_crops(raw_video: str, camera_cues: list[dict]) -> str:
     return zoomed_path
 
 
+def _apply_sequential_reveals(raw_video: str, reveal_cues: list[dict]) -> str:
+    """
+    Overlays high-res sequential snapshots.
+    We center them in the 1080x1920 video and scale to completely overwrite the screen, 
+    forming a massive jump-cut pop-in sequence holding 0.6 seconds per step.
+    """
+    if not reveal_cues:
+        return raw_video
+
+    filter_parts = []
+    overlay_chain = "[0:v]"
+    inputs = []
+    
+    for i, cue in enumerate(reveal_cues):
+        inputs.append(cue["screenshot"])
+        t_start = cue["timestamp"]
+        t_end = t_start + 0.6
+        img_in = i + 1
+
+        # Use force_original_aspect_ratio=decrease and pad with black borders
+        filter_parts.append(
+            f"[{img_in}:v]scale=1080:1920:force_original_aspect_ratio=decrease,"
+            f"pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=black[rev_{i}]"
+        )
+        filter_parts.append(
+            f"{overlay_chain}[rev_{i}]overlay=0:0:enable='between(t,{t_start:.2f},{t_end:.2f})'[v{i}]"
+        )
+        overlay_chain = f"[v{i}]"
+        
+    filter_complex = ";".join(filter_parts)
+    revealed_path = str(OUTPUT_DIR / "revealed_video.mp4")
+    
+    cmd = ["ffmpeg", "-y", "-i", raw_video]
+    for img in inputs:
+        cmd.extend(["-loop", "1", "-t", "60", "-i", img])
+        
+    cmd.extend([
+        "-filter_complex", filter_complex,
+        "-map", overlay_chain,
+        "-c:v", "libx264", "-preset", "fast",
+        "-pix_fmt", "yuv420p",
+        revealed_path,
+    ])
+    
+    print(f"[MUXER] 🎯 Running sequential reveal FFmpeg pass...")
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        print("[MUXER] ⚠️  Sequential reveal crop failed")
+        print(f"           {result.stderr[-500:]}")
+        return raw_video
+        
+    print(f"[MUXER] ✅ Revealed video → {revealed_path}")
+    return revealed_path
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # CLI Entry Point
 # ═══════════════════════════════════════════════════════════════════════════
@@ -687,7 +902,7 @@ def main():
     global OLLAMA_MODEL
 
     parser = argparse.ArgumentParser(
-        description="🎬 Text2Beluga Autonomous Video Factory",
+        description="🎬 json2xzky Autonomous Video Factory",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -738,13 +953,14 @@ Examples:
     input_path = Path(args.input)
 
     print("\n╔═══════════════════════════════════════╗")
-    print("║  🎬 TEXT2BELUGA AUTONOMOUS FACTORY     ║")
+    print("║  🎬 json2xzky AUTONOMOUS FACTORY       ║")
     print("╚═══════════════════════════════════════╝\n")
 
     # ── Step 1: Parse ─────────────────────────────────────────────────
     if args.skip_parse or input_path.suffix == ".json":
         print(f"[PIPELINE] 📂 Using existing JSON: {input_path}")
         scenario = json.loads(input_path.read_text(encoding="utf-8"))
+        scenario = _apply_sequential_reveal_groups(scenario)
         json_file = str(input_path)
     else:
         print("[PIPELINE] ═══ STEP 1/4: THE BRAIN ═══")
@@ -771,11 +987,11 @@ Examples:
 
     # ── Step 3: Record ────────────────────────────────────────────────
     print("\n[PIPELINE] ═══ STEP 3/4: THE ACTOR ═══")
-    raw_video, audio_timeline, camera_cues = record_simulation(json_file)
+    raw_video, audio_timeline, camera_cues, reveal_cues = record_simulation(json_file)
 
     # ── Step 4: Mux ───────────────────────────────────────────────────
     print("\n[PIPELINE] ═══ STEP 4/4: THE MUXER ═══")
-    final = mux_audio_video(raw_video, audio_timeline, camera_cues)
+    final = mux_audio_video(raw_video, audio_timeline, camera_cues, reveal_cues)
 
     print(f"\n╔═══════════════════════════════════════╗")
     print(f"║  ✅ PIPELINE COMPLETE                  ║")

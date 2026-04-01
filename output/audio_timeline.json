@@ -1,58 +1,570 @@
 [
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 0
+    "timestamp": 0.002
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 1.506
+    "timestamp": 1.519
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
-    "timestamp": 2.507
+    "timestamp": 2.52
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 3.764
+    "timestamp": 3.796
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 3.822
+    "timestamp": 3.85
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
-    "timestamp": 4.803
+    "timestamp": 5.837
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 5.955
+    "timestamp": 6.19
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/vineboom.mp3",
-    "timestamp": 5.978
+    "timestamp": 6.203
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
-    "timestamp": 6.771
+    "timestamp": 7.196
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 7.973
+    "timestamp": 8.199
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/softmessage.mp3",
-    "timestamp": 7.982
+    "timestamp": 8.21
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 10.201
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
-    "timestamp": 9.975
+    "timestamp": 11.202
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 11.626
+    "timestamp": 12.053
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/confusion.mp3",
+    "timestamp": 12.06
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 14.056
   },
   {
     "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
-    "timestamp": 11.627
+    "timestamp": 15.458
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/pop.mp3",
+    "timestamp": 15.503
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 16.973
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 17.176
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/pop.mp3",
+    "timestamp": 17.176
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 18.724
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 19.888
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/hehascome.mp3",
+    "timestamp": 20.076
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 21.982
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 22.985
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 25.237
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 25.267
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 27.741
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 28.045
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/pop.mp3",
+    "timestamp": 28.045
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 29.049
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 30.006
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/vineboom.mp3",
+    "timestamp": 30.008
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 32.013
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 33.015
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 33.418
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/error.mp3",
+    "timestamp": 33.466
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 34.922
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 37.325
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/pop.mp3",
+    "timestamp": 37.325
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 39.338
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 40.989
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 40.989
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 43.002
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 43.709
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/vineboom.mp3",
+    "timestamp": 43.71
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 44.723
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 46.14
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/pop.mp3",
+    "timestamp": 46.141
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 47.718
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 49.077
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/softmessage.mp3",
+    "timestamp": 49.077
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 52.345
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 53.367
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 54.08
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/pop.mp3",
+    "timestamp": 54.081
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 55.097
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 55.301
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/softmessage.mp3",
+    "timestamp": 55.301
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 56.303
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 56.708
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/scary.mp3",
+    "timestamp": 57.001
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 58.745
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 58.984
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/pop.mp3",
+    "timestamp": 58.984
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 60.029
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 60.525
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/confusion.mp3",
+    "timestamp": 60.525
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 62.535
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 63.799
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 63.799
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 65.831
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 66.782
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/modpablo.mp3",
+    "timestamp": 66.869
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 68.801
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 69.805
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 70.909
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 70.91
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 72.915
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 74.018
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/zap.mp3",
+    "timestamp": 74.035
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 76.02
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 76.777
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/modeugene.mp3",
+    "timestamp": 76.814
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 78.795
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 78.997
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 78.997
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 80.001
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 80.912
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/error.mp3",
+    "timestamp": 80.913
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 82.422
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 84.966
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/vineboom.mp3",
+    "timestamp": 84.967
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 87.101
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 87.493
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 87.494
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 88.497
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 90.703
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/error.mp3",
+    "timestamp": 90.703
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 91.706
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 91.943
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/vineboom.mp3",
+    "timestamp": 91.945
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 94.355
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 95.874
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/scary.mp3",
+    "timestamp": 95.88
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 97.966
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 98.512
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 98.515
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 100.603
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 101.769
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/explosion.mp3",
+    "timestamp": 102.148
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 103.869
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 105.698
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/error.mp3",
+    "timestamp": 105.781
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 108.122
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 109.408
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 109.409
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 111.497
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 112.681
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/error.mp3",
+    "timestamp": 112.682
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 114.321
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 115.058
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/scary.mp3",
+    "timestamp": 115.059
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 117.177
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 117.761
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/vineboom.mp3",
+    "timestamp": 117.762
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 118.379
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 118.587
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/softmessage.mp3",
+    "timestamp": 118.587
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 120.175
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 121.532
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/error.mp3",
+    "timestamp": 121.532
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 123.539
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 125.494
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/vineboom.mp3",
+    "timestamp": 125.494
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 127.497
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 128.95
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/explosion.mp3",
+    "timestamp": 128.95
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/typing.mp3",
+    "timestamp": 130.96
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/message.mp3",
+    "timestamp": 132.064
+  },
+  {
+    "file": "/home/aabdulmecitz/t2bel/assets/sounds/mp3/leave.mp3",
+    "timestamp": 132.196
   }
 ]

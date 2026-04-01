@@ -1,1 +1,230 @@
-[]
+[
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 6,
+    "timestamp": 6.194,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_6.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 17,
+    "timestamp": 19.966,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_17.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 24,
+    "timestamp": 30.011,
+    "bbox": {
+      "x": 0,
+      "y": 1811,
+      "width": 1080,
+      "height": 25
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_24.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 27,
+    "timestamp": 33.422,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_27.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 33,
+    "timestamp": 43.718,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_33.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 44,
+    "timestamp": 56.742,
+    "bbox": {
+      "x": 0,
+      "y": 1811,
+      "width": 1080,
+      "height": 25
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_44.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 63,
+    "timestamp": 80.92,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_63.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 65,
+    "timestamp": 85.079,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_65.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 69,
+    "timestamp": 90.705,
+    "bbox": {
+      "x": 0,
+      "y": 1811,
+      "width": 1080,
+      "height": 25
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_69.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 71,
+    "timestamp": 92.355,
+    "bbox": {
+      "x": 0,
+      "y": 1811,
+      "width": 1080,
+      "height": 25
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_71.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 73,
+    "timestamp": 95.958,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_73.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 77,
+    "timestamp": 101.866,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_77.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 79,
+    "timestamp": 106.08,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_79.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 83,
+    "timestamp": 112.811,
+    "bbox": {
+      "x": 0,
+      "y": 1788,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_83.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 85,
+    "timestamp": 115.095,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_85.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 87,
+    "timestamp": 117.871,
+    "bbox": {
+      "x": 0,
+      "y": 1811,
+      "width": 1080,
+      "height": 25
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_87.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 91,
+    "timestamp": 121.538,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_91.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 93,
+    "timestamp": 125.497,
+    "bbox": {
+      "x": 0,
+      "y": 1788,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_93.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 95,
+    "timestamp": 128.96,
+    "bbox": {
+      "x": 0,
+      "y": 1787,
+      "width": 1080,
+      "height": 49
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_95.png"
+  }
+]

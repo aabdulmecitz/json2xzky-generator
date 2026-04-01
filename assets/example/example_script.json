@@ -393,7 +393,9 @@
     "pause_after": 1.0,
     "sound": "vineboom",
     "sound_query": null,
-    "zoom": true
+    "zoom": true,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 1
   },
   {
     "id": 34,
@@ -417,7 +419,9 @@
     "pause_after": 1.5,
     "sound": "pop",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 1
   },
   {
     "id": 36,
@@ -441,7 +445,9 @@
     "pause_after": 2.5,
     "sound": "softmessage",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 1
   },
   {
     "id": 38,
@@ -477,7 +483,9 @@
     "pause_after": 1.0,
     "sound": "pop",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 2
   },
   {
     "id": 41,
@@ -501,7 +509,9 @@
     "pause_after": 1.0,
     "sound": "softmessage",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 2
   },
   {
     "id": 43,
@@ -525,7 +535,9 @@
     "pause_after": 2.0,
     "sound": "scary",
     "sound_query": null,
-    "zoom": true
+    "zoom": true,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 2
   },
   {
     "id": 45,
@@ -549,7 +561,9 @@
     "pause_after": 1.0,
     "sound": "pop",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 2
   },
   {
     "id": 47,
@@ -657,7 +671,9 @@
     "pause_after": 2.0,
     "sound": "typing",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 3
   },
   {
     "id": 56,
@@ -681,7 +697,9 @@
     "pause_after": 2.0,
     "sound": "zap",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 3
   },
   {
     "id": 58,
@@ -705,7 +723,9 @@
     "pause_after": 2.0,
     "sound": "modeugene",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 3
   },
   {
     "id": 60,
@@ -729,7 +749,9 @@
     "pause_after": 1.0,
     "sound": "message",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 3
   },
   {
     "id": 62,
@@ -801,7 +823,9 @@
     "pause_after": 1.0,
     "sound": "typing",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 4
   },
   {
     "id": 68,
@@ -825,7 +849,9 @@
     "pause_after": 1.0,
     "sound": "error",
     "sound_query": null,
-    "zoom": true
+    "zoom": true,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 4
   },
   {
     "id": 70,
@@ -849,7 +875,9 @@
     "pause_after": 2.0,
     "sound": "vineboom",
     "sound_query": null,
-    "zoom": true
+    "zoom": true,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 4
   },
   {
     "id": 72,
@@ -1017,7 +1045,9 @@
     "pause_after": 1.5,
     "sound": "scary",
     "sound_query": null,
-    "zoom": true
+    "zoom": true,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 5
   },
   {
     "id": 86,
@@ -1041,7 +1071,9 @@
     "pause_after": 0.5,
     "sound": "vineboom",
     "sound_query": null,
-    "zoom": true
+    "zoom": true,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 5
   },
   {
     "id": 88,
@@ -1065,7 +1097,9 @@
     "pause_after": 1.5,
     "sound": "softmessage",
     "sound_query": null,
-    "zoom": false
+    "zoom": false,
+    "crop_mode": "sequential_reveal",
+    "reveal_group_id": 5
   },
   {
     "id": 90,

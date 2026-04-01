@@ -1,0 +1,121 @@
+[
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 33,
+    "group_id": 1,
+    "timestamp": 43.721,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g1_step0.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 35,
+    "group_id": 1,
+    "timestamp": 46.218,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g1_step1.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 37,
+    "group_id": 1,
+    "timestamp": 49.15,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g1_step2.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 40,
+    "group_id": 2,
+    "timestamp": 54.097,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g2_step0.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 42,
+    "group_id": 2,
+    "timestamp": 55.303,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g2_step1.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 44,
+    "group_id": 2,
+    "timestamp": 56.743,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g2_step2.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 46,
+    "group_id": 2,
+    "timestamp": 59.027,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g2_step3.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 55,
+    "group_id": 3,
+    "timestamp": 70.915,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g3_step0.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 57,
+    "group_id": 3,
+    "timestamp": 74.02,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g3_step1.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 59,
+    "group_id": 3,
+    "timestamp": 76.795,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g3_step2.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 61,
+    "group_id": 3,
+    "timestamp": 79.001,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g3_step3.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 67,
+    "group_id": 4,
+    "timestamp": 87.497,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g4_step0.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 69,
+    "group_id": 4,
+    "timestamp": 90.706,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g4_step1.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 71,
+    "group_id": 4,
+    "timestamp": 92.355,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g4_step2.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 85,
+    "group_id": 5,
+    "timestamp": 115.097,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g5_step0.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 87,
+    "group_id": 5,
+    "timestamp": 117.875,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g5_step1.png"
+  },
+  {
+    "type": "REVEAL_TIMESTAMP",
+    "msg_id": 89,
+    "group_id": 5,
+    "timestamp": 118.673,
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/reveal_g5_step2.png"
+  }
+]
