@@ -339,13 +339,12 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
     display: block;
     position: absolute;
     top: 50%;
-    left: 2rem;
-    width: 2rem;
-    height: 1.25rem;
+    left: 33px; /* Center of the main 36px avatar (-1px for the border) */
+    width: 33px; /* Horizontally touches just shy of the reply-avatar */
+    height: 12px; /* Dips downwards perfectly meeting the main avatar */
     border-left: 2px solid var(--reply-line-color);
     border-top: 2px solid var(--reply-line-color);
     border-top-left-radius: 6px;
-    transform: translateY(-100%);
     box-sizing: border-box;
 }
 
