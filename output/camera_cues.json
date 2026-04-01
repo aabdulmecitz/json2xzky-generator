@@ -2,7 +2,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 6,
-    "timestamp": 6.194,
+    "timestamp": 6.924,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -14,7 +14,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 17,
-    "timestamp": 19.966,
+    "timestamp": 20.587,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -26,7 +26,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 24,
-    "timestamp": 30.011,
+    "timestamp": 30.645,
     "bbox": {
       "x": 0,
       "y": 1811,
@@ -38,7 +38,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 27,
-    "timestamp": 33.422,
+    "timestamp": 34.057,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -50,7 +50,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 33,
-    "timestamp": 43.718,
+    "timestamp": 44.337,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -62,7 +62,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 44,
-    "timestamp": 56.742,
+    "timestamp": 56.473,
     "bbox": {
       "x": 0,
       "y": 1811,
@@ -74,7 +74,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 63,
-    "timestamp": 80.92,
+    "timestamp": 80.44,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -86,7 +86,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 65,
-    "timestamp": 85.079,
+    "timestamp": 83.674,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -98,7 +98,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 69,
-    "timestamp": 90.705,
+    "timestamp": 89.249,
     "bbox": {
       "x": 0,
       "y": 1811,
@@ -110,7 +110,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 71,
-    "timestamp": 92.355,
+    "timestamp": 90.455,
     "bbox": {
       "x": 0,
       "y": 1811,
@@ -122,10 +122,10 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 73,
-    "timestamp": 95.958,
+    "timestamp": 93.963,
     "bbox": {
       "x": 0,
-      "y": 1787,
+      "y": 1788,
       "width": 1080,
       "height": 49
     },
@@ -134,10 +134,10 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 77,
-    "timestamp": 101.866,
+    "timestamp": 99.401,
     "bbox": {
       "x": 0,
-      "y": 1787,
+      "y": 1788,
       "width": 1080,
       "height": 49
     },
@@ -146,7 +146,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 79,
-    "timestamp": 106.08,
+    "timestamp": 103.162,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -158,7 +158,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 83,
-    "timestamp": 112.811,
+    "timestamp": 109.479,
     "bbox": {
       "x": 0,
       "y": 1788,
@@ -170,7 +170,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 85,
-    "timestamp": 115.095,
+    "timestamp": 111.685,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -182,7 +182,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 87,
-    "timestamp": 117.871,
+    "timestamp": 113.654,
     "bbox": {
       "x": 0,
       "y": 1811,
@@ -194,7 +194,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 91,
-    "timestamp": 121.538,
+    "timestamp": 117.243,
     "bbox": {
       "x": 0,
       "y": 1787,
@@ -206,7 +206,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 93,
-    "timestamp": 125.497,
+    "timestamp": 121.2,
     "bbox": {
       "x": 0,
       "y": 1788,
@@ -218,7 +218,7 @@
   {
     "type": "ZOOM_CUE",
     "msg_id": 95,
-    "timestamp": 128.96,
+    "timestamp": 124.656,
     "bbox": {
       "x": 0,
       "y": 1787,

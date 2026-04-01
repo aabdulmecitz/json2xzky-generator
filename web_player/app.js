@@ -218,7 +218,9 @@ function getAvatarUrl(userId) {
     if (charactersDict[userId] && charactersDict[userId].profile_pic) {
         return `../assets/profile_pictures/${charactersDict[userId].profile_pic}`;
     }
-    return '';
+    const hash = userId.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0);
+    const index = Math.abs(hash) % 6;
+    return `https://cdn.discordapp.com/embed/avatars/${index}.png`;
 }
 
 function getColor(userId) {
@@ -264,7 +266,7 @@ function appendMessage(entry) {
         replyHeader.className = 'reply-header';
         
         replyHeader.innerHTML = `
-            <img src="${getAvatarUrl(replyTarget.user_id)}" onerror="this.style.display='none'">
+            <img src="${getAvatarUrl(replyTarget.user_id)}" onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
             <span style="color: ${getColor(replyTarget.user_id)}; font-weight: 600;">${replyTarget.user_id}</span>
             <span class="reply-preview">${formatMessage(replyTarget.message_content || replyTarget.text)}</span>
         `;
@@ -277,7 +279,7 @@ function appendMessage(entry) {
     wrapper.className = 'message-content-wrapper';
     
     let html = `
-        <img class="message-avatar" src="${getAvatarUrl(entry.user_id)}" onerror="this.style.display='none'">
+        <img class="message-avatar" src="${getAvatarUrl(entry.user_id)}" onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
         <div class="message-body">
     `;
     
