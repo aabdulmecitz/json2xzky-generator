@@ -18,11 +18,14 @@ const dom = {
     startOverlay: document.getElementById('start-overlay'),
     scenarioInput: document.getElementById('scenario-input'),
     startBtn: document.getElementById('start-btn'),
+    instantBtn: document.getElementById('instant-btn'),
     messagesList: document.getElementById('messages-list'),
     typingIndicator: document.getElementById('typing-indicator'),
     typingText: document.getElementById('typing-text'),
     chatContainer: document.getElementById('chat-container')
 };
+
+let isInstant = false;
 
 fetch('../assets/profile_pictures/characters.json')
     .then(res => res.json())
@@ -41,6 +44,7 @@ dom.scenarioInput.addEventListener('change', (e) => {
         try {
             scenarioEntries = JSON.parse(ev.target.result);
             dom.startBtn.disabled = false;
+            dom.instantBtn.disabled = false;
         } catch (err) {
             alert("Invalid JSON file");
         }
@@ -67,6 +71,16 @@ dom.startBtn.addEventListener('click', async () => {
     
     // Add recording mode styling (hides external scrollbars)
     document.body.classList.add('recording-mode');
+
+    runSimulation();
+});
+
+dom.instantBtn.addEventListener('click', async () => {
+    isInstant = true;
+
+    dom.startOverlay.classList.add('hidden');
+    document.body.classList.add('recording-mode');
+    document.body.classList.add('instant-mode'); // Disable CSS animations
 
     runSimulation();
 });
@@ -205,9 +219,10 @@ function appendMessage(entry) {
 
     dom.messagesList.appendChild(div);
     
-    // Sound playback exactly sync'd with DOM update
-    playSound(audioBuffers.ping);
-    if (entry.sound) playUserSound(entry.sound);
+    if (!isInstant) {
+        playSound(audioBuffers.ping);
+        if (entry.sound) playUserSound(entry.sound);
+    }
 
     scrollToBottom();
 }
@@ -236,8 +251,10 @@ function appendSystemMessage(entry) {
 
     dom.messagesList.appendChild(div);
     
-    if (entry.sound) playUserSound(entry.sound);
-    else playSound(audioBuffers.ping);
+    if (!isInstant) {
+        if (entry.sound) playUserSound(entry.sound);
+        else playSound(audioBuffers.ping);
+    }
     
     scrollToBottom();
 }
@@ -257,28 +274,32 @@ async function runSimulation() {
         } else if (entry.action === 'message') {
             appendMessage(entry);
         } else if (entry.action === 'typing') {
-            // Calculate strict typing duration
-            const msgLength = (entry.message_content || "").length;
-            const durationSec = Math.max(0.2, msgLength * 0.05);
-            
-            currentTypingSource = playSound(audioBuffers.typing, true);
-            dom.typingText.textContent = `${entry.user_id} is typing...`;
-            dom.typingIndicator.classList.remove('hidden');
-            scrollToBottom();
-            
-            await sleep(durationSec * 1000);
-            
-            dom.typingIndicator.classList.add('hidden');
-            if (currentTypingSource) {
-                currentTypingSource.stop();
-                currentTypingSource = null;
+            if (!isInstant) {
+                // Calculate strict typing duration
+                const msgLength = (entry.message_content || "").length;
+                const durationSec = Math.max(0.2, msgLength * 0.05);
+                
+                currentTypingSource = playSound(audioBuffers.typing, true);
+                dom.typingText.textContent = `${entry.user_id} is typing...`;
+                dom.typingIndicator.classList.remove('hidden');
+                scrollToBottom();
+                
+                await sleep(durationSec * 1000);
+                
+                dom.typingIndicator.classList.add('hidden');
+                if (currentTypingSource) {
+                    currentTypingSource.stop();
+                    currentTypingSource = null;
+                }
             }
         }
         
-        // Final Pause behavior happens AFTER the action completes
-        const pauseSec = entry.pause_after || 0;
-        if(pauseSec > 0) {
-            await sleep(pauseSec * 1000);
+        if (!isInstant) {
+            // Final Pause behavior happens AFTER the action completes
+            const pauseSec = entry.pause_after || 0;
+            if(pauseSec > 0) {
+                await sleep(pauseSec * 1000);
+            }
         }
     }
 }

@@ -195,6 +195,12 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
     animation: fadeAndSlideUp 0.1s ease-out forwards;
 }
 
+.instant-mode .message, .instant-mode .system-message {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
 /* Consecutive messages from same user (grouped) */
 .message.grouped {
     margin-top: 0.125rem;
