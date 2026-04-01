@@ -398,8 +398,8 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
-            viewport={"width": 1080, "height": 1920},
-            device_scale_factor=1,
+            viewport={"width": 432, "height": 768},
+            device_scale_factor=2.5,
             record_video_dir=str(raw_video_dir),
             record_video_size={"width": 1080, "height": 1920},
         )
@@ -486,8 +486,8 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
                 groups.setdefault(cue["group_id"], []).append(cue)
                 
             context2 = browser.new_context(
-                viewport={"width": 1080, "height": 1920},
-                device_scale_factor=3.0
+                viewport={"width": 432, "height": 768},
+                device_scale_factor=4.0
             )
             page2 = context2.new_page()
             page2.goto(url, wait_until="networkidle")
@@ -787,13 +787,15 @@ def _apply_zoom_crops(raw_video: str, camera_cues: list[dict]) -> str:
         t_end = t_start + ZOOM_DURATION
         
         # Crop coordinates (clamped to video bounds)
-        cx = max(0, bbox["x"])
-        cy = max(0, bbox["y"])
-        cw = max(100, bbox["width"])
-        ch = max(100, bbox["height"])
+        # Muxer extracts from physical pixels, so scale from CSS
+        scale_factor = 2.5
+        cx = max(0, bbox["x"] * scale_factor)
+        cy = max(0, bbox["y"] * scale_factor)
+        cw = max(100, bbox["width"] * scale_factor)
+        ch = max(100, bbox["height"] * scale_factor)
         
         # Add padding around the message for cinematic feel
-        pad = 40
+        pad = 40 * scale_factor
         cx = max(0, cx - pad)
         cy = max(0, cy - pad)
         cw = cw + pad * 2
