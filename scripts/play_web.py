@@ -14,9 +14,9 @@ def run_server():
     
     Handler = http.server.SimpleHTTPRequestHandler
     
-    # Ask the OS for an available open port automatically (port 0)
-    with socketserver.TCPServer(("localhost", 0), Handler) as httpd:
-        port = httpd.server_address[1]
+    # Use fixed port 55777, bind to 0.0.0.0 to ensure Windows can access it from WSL
+    with socketserver.TCPServer(("0.0.0.0", 55777), Handler) as httpd:
+        port = 55777
         url = f"http://localhost:{port}/web_player/index.html"
         print(f"Serving at {url}")
         print("Opening Web Simulator in your default browser...")

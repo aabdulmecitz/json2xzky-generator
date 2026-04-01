@@ -20,7 +20,7 @@
   {
     "id": 3,
     "user_id": "Pizza",
-    "message_content": "yo whats good everyone \ud83d\ude0e",
+    "message_content": "yo whats good everyone 😎",
     "action": "typing",
     "reply_to_id": null,
     "pause_after": 0.0
@@ -28,7 +28,7 @@
   {
     "id": 4,
     "user_id": "Pizza",
-    "message_content": "yo whats good everyone \ud83d\ude0e",
+    "message_content": "yo whats good everyone 😎",
     "action": "message",
     "reply_to_id": null,
     "pause_after": 1.0,
@@ -37,7 +37,7 @@
   {
     "id": 5,
     "user_id": "Billy",
-    "message_content": "\ud83d\udc80 bruh who invited you",
+    "message_content": "💀 bruh who invited you",
     "action": "typing",
     "reply_to_id": 4,
     "pause_after": 0.0
@@ -45,7 +45,7 @@
   {
     "id": 6,
     "user_id": "Billy",
-    "message_content": "\ud83d\udc80 bruh who invited you",
+    "message_content": "💀 bruh who invited you",
     "action": "message",
     "reply_to_id": 4,
     "pause_after": 0.8,

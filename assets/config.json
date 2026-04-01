@@ -1,0 +1,62 @@
+{
+    "serverName": "Beluga's Server",
+    "channelName": "general",
+    "use24HourClock": false,
+    
+    "theme": "dark",
+    "accentColor": "#5865F2",
+    
+    "statusBar": {
+        "carrier": "T-Mobile",
+        "time": "9:41",
+        "batteryPercent": 87,
+        "wifiEnabled": true,
+        "signalBars": 4
+    },
+
+    "servers": [
+        {
+            "id": "server_beluga",
+            "name": "Beluga's Server",
+            "icon_color": "#5865F2",
+            "channels": ["general", "memes", "voice-chat"]
+        },
+        {
+            "id": "server_gaming",
+            "name": "Gaming Hub",
+            "icon_color": "#23a559",
+            "channels": ["lobby", "minecraft", "valorant"]
+        }
+    ],
+
+    "onlineMembers": [
+        { "user": "Beluga", "status": "online" },
+        { "user": "Hecker", "status": "idle" },
+        { "user": "Pablo", "status": "dnd" },
+        { "user": "Skittle", "status": "online" }
+    ],
+
+    "userProfiles": {
+        "Beluga": {
+            "bannerColor": "#5865F2",
+            "badges": ["nitro", "boost_1"],
+            "aboutMe": "Professional cat. 🐱",
+            "memberSince": "Jan 15, 2023"
+        },
+        "Hecker": {
+            "bannerColor": "#23a559",
+            "badges": ["nitro", "developer"],
+            "aboutMe": "I know everything.",
+            "memberSince": "Dec 01, 2022"
+        }
+    },
+
+    "defaultSounds": {
+        "message": "discord_ping",
+        "typing": "typing",
+        "join": "discord_ping",
+        "call": "discord_ringtone",
+        "mute": "mute_ping",
+        "reaction": "pop"
+    }
+}

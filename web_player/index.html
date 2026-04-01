@@ -2,49 +2,228 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text2Beluga Web Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Discord Mobile Sandbox</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Overlay for selecting scenario & starting simulation cleanly -->
+    <!-- Overlay for selecting scenario & starting simulation -->
     <div id="start-overlay" class="overlay">
         <div class="overlay-modal">
             <h2>Text2Beluga Simulator</h2>
-            <p>Select your scenario JSON to begin the 1080x1920 real-time simulation.</p>
+            <p>Select your scenario JSON to begin simulation.</p>
             <input type="file" id="scenario-input" accept=".json" />
-            
-            <button id="start-btn" disabled>Start Simulator (Fullscreen Video)</button>
-            <button id="instant-btn" style="background:#23a559; margin-top:10px;" disabled>Instant Render (For Screenshots)</button>
-            <p class="subtext">This will enter fullscreen and hide all UI clutter.</p>
+            <button id="start-btn" disabled>▶ Start Simulator</button>
+            <button id="instant-btn" class="btn-instant" disabled>⚡ Instant Render</button>
+            <p class="subtext">Powered by Text2Beluga</p>
         </div>
     </div>
 
-    <!-- Wrapper that enforces aspect ratio and handles alignment -->
+    <!-- Main Viewport -->
     <div id="viewport-wrapper">
-        <!-- Main Chat Window (Discord 2026 Style) -->
         <div id="discord-app">
-            <!-- Chat Area -->
-            <main class="chat-container" id="chat-container">
-                <div id="messages-list">
-                    <!-- Messages will be injected here dynamically -->
+
+            <!-- ═══════ iOS Status Bar ═══════ -->
+            <div id="status-bar">
+                <div class="status-left">
+                    <span id="status-time">9:41</span>
                 </div>
-                
-                <!-- Typing Indicator (appears beneath messages when someone is typing) -->
-                <div id="typing-indicator" class="hidden">
-                    <div class="dots">
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
+                <div class="status-notch"></div>
+                <div class="status-right">
+                    <!-- Signal -->
+                    <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx="0.5" fill="white"/><rect x="4.5" y="6" width="3" height="6" rx="0.5" fill="white"/><rect x="9" y="3" width="3" height="9" rx="0.5" fill="white"/><rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="white"/></svg>
+                    <!-- WiFi -->
+                    <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="white"/><path d="M4.94 7.94a4.5 4.5 0 016.12 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M2.1 5.1a8 8 0 0111.8 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <!-- Battery -->
+                    <svg width="27" height="12" viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="23" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="20" height="8" rx="1.5" fill="white"/><path d="M25 4v4a2 2 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
+                </div>
+            </div>
+
+            <!-- ═══════ Push Notification ═══════ -->
+            <div id="push-notification" class="push-notification">
+                <img class="push-avatar" id="push-avatar" src="" onerror="this.style.display='none'">
+                <div class="push-body">
+                    <span class="push-title" id="push-title">User</span>
+                    <span class="push-text" id="push-text">Message</span>
+                </div>
+            </div>
+
+            <!-- ═══════ Incoming Call Overlay ═══════ -->
+            <div id="incoming-call" class="incoming-call-overlay">
+                <div class="call-content">
+                    <img id="call-avatar" class="call-avatar" src="">
+                    <div id="call-name" class="call-name">Hecker</div>
+                    <div class="call-subtitle">Incoming Voice Call...</div>
+                    <div class="call-actions">
+                        <button class="call-btn decline" data-testid="call-decline">
+                            <svg width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08a.956.956 0 010-1.36C3.46 8.78 7.54 7 12 7s8.54 1.78 11.71 4.72c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85a1.01 1.01 0 01-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+                        </button>
+                        <button class="call-btn accept" data-testid="call-accept">
+                            <svg width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.68c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                        </button>
                     </div>
-                    <span id="typing-text">Someone is typing...</span>
                 </div>
-            </main>
+            </div>
+
+            <!-- ═══════ Profile Overlay ═══════ -->
+            <div id="profile-overlay" class="profile-overlay">
+                <div class="profile-sheet">
+                    <div class="profile-banner" id="profile-banner"></div>
+                    <div class="profile-info">
+                        <img id="profile-avatar" class="profile-avatar-large" src="">
+                        <div id="profile-name" class="profile-display-name">Username</div>
+                        <div id="profile-username" class="profile-tag">username#0000</div>
+                        <div class="profile-badges" id="profile-badges">
+                            <span class="badge">🎮</span>
+                        </div>
+                        <div class="profile-section">
+                            <div class="profile-section-title">ABOUT ME</div>
+                            <div id="profile-about" class="profile-section-content">No bio set.</div>
+                        </div>
+                        <div class="profile-section">
+                            <div class="profile-section-title">MEMBER SINCE</div>
+                            <div class="profile-section-content">Apr 1, 2026</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════ Drawer Overlay ═══════ -->
+            <div id="drawer-overlay" class="drawer-closed" data-testid="drawer-overlay"></div>
+
+            <!-- ═══════ Navigation Drawer ═══════ -->
+            <nav id="nav-drawer" class="drawer-closed" data-testid="nav-drawer">
+                <!-- Server Column -->
+                <div id="server-list" data-testid="server-list">
+                    <!-- Home button -->
+                    <div class="server-icon home-icon" data-testid="server-home">
+                        <svg width="28" height="20" viewBox="0 0 28 20"><path fill="white" d="M23.02 1.32L19.56 0l-1.54 3.67 5.01 2.09L23.02 1.32zM8.47 0L4.98 1.32 5 5.72l4.97-2.07L8.47 0zM14 1.54L8.4 4.1 14 11.34l5.6-7.24L14 1.54zM14 13.53L7.43 5.37 0 8.49l14 11.5 14-11.52-7.43-3.12L14 13.53z"/></svg>
+                    </div>
+                    <div class="server-separator"></div>
+                    <div class="server-icon active" data-testid="server-icon-1">
+                        <div class="server-icon-img" style="background-color: #5865F2;">
+                            <span>B</span>
+                        </div>
+                        <div class="server-active-pill"></div>
+                    </div>
+                    <div class="server-icon" data-testid="server-icon-2">
+                        <div class="server-icon-img" style="background-color: #57F287;">
+                            <span>M</span>
+                        </div>
+                    </div>
+                    <div class="server-icon" data-testid="server-icon-3">
+                        <div class="server-icon-img" style="background-color: #ED4245;">
+                            <span>G</span>
+                        </div>
+                    </div>
+                    <div class="server-separator"></div>
+                    <div class="server-icon add-server" data-testid="server-add">
+                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#57F287" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Channel Column -->
+                <div id="channel-list" data-testid="channel-list">
+                    <div class="server-header" data-testid="server-header">
+                        <span>Beluga's Server</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                    </div>
+                    <div class="channel-category">
+                        <svg width="12" height="12" viewBox="0 0 24 24"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                        TEXT CHANNELS
+                    </div>
+                    <div class="channel-item active" data-testid="channel-general">
+                        <svg class="hash-icon" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg>
+                        general
+                    </div>
+                    <div class="channel-item" data-testid="channel-memes">
+                        <svg class="hash-icon" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg>
+                        memes
+                    </div>
+                    <div class="channel-category">
+                        <svg width="12" height="12" viewBox="0 0 24 24"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                        VOICE CHANNELS
+                    </div>
+                    <div class="channel-item voice-channel" data-testid="channel-voice">
+                        <svg class="hash-icon" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a1 1 0 00-1-1 9.5 9.5 0 000 19 1 1 0 001-1v-2.08A6.5 6.5 0 0118 12.5V12a1 1 0 10-2 0v.5A4.5 4.5 0 0112 17h-.5a.5.5 0 00-.5.5V20a7.5 7.5 0 010-15 .5.5 0 00.5-.5V3zM12 8a4 4 0 014 4 1 1 0 01-2 0 2 2 0 00-2-2 1 1 0 010-2z"/></svg>
+                        Lounge
+                    </div>
+                </div>
+            </nav>
+
+            <!-- ═══════ Main App View ═══════ -->
+            <div id="main-view">
+                <!-- Top Header -->
+                <header id="top-header" data-testid="top-header">
+                    <div class="header-left">
+                        <button id="btn-hamburger" data-testid="btn-hamburger">
+                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                        </button>
+                        <div class="header-title" data-testid="header-title">
+                            <span class="hash-icon-header">
+                              <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg>
+                            </span>
+                            general
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <!-- Thread -->
+                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5.43 21a.997.997 0 01-.83-1.56l2.21-3.3A8.96 8.96 0 013 9c0-4.97 4.03-9 9-9s9 4.03 9 9-4.03 9-9 9a8.9 8.9 0 01-3-.52L5.43 21zM12 2C8.14 2 5 5.14 5 9s3.14 7 7 7a6.97 6.97 0 003.15-.76l.65-.32.32.65.7 1.44.85-1.28a.998.998 0 00-.05-.28C18.87 14.09 19 11.57 19 9c0-3.86-3.14-7-7-7z"/></svg>
+                        <!-- Members -->
+                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14.5 8a3 3 0 10-3-3 3 3 0 003 3zm0 2a5 5 0 115-5 5 5 0 01-5 5zm-7.5 8.5a3.5 3.5 0 013.5-3.5h8a3.5 3.5 0 013.5 3.5V20a1 1 0 01-1 1H8a1 1 0 01-1-1v-1.5zM9 5a3 3 0 100 6 3 3 0 000-6z"/></svg>
+                    </div>
+                </header>
+
+                <!-- Connected Voice Banner -->
+                <div id="voice-connected-banner" class="voice-connected-banner">
+                    <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                    <span>Voice Connected</span>
+                </div>
+
+                <!-- Chat Area -->
+                <main class="chat-container" id="chat-container" data-testid="chat-container">
+                    <div id="messages-list">
+                        <!-- Welcome Header (shown when chat is empty) -->
+                        <div id="welcome-header" class="welcome-header">
+                            <div class="welcome-hash">
+                                <svg width="44" height="44" viewBox="0 0 24 24"><path fill="white" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg>
+                            </div>
+                            <h1>Welcome to #general</h1>
+                            <p>This is the start of the #general channel.</p>
+                        </div>
+                    </div>
+
+                    <!-- Typing Indicator -->
+                    <div id="typing-indicator" class="hidden">
+                        <div class="typing-dots">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <span id="typing-text">Someone is typing...</span>
+                    </div>
+                </main>
+
+                <!-- Bottom Input Bar -->
+                <div id="bottom-input-bar" data-testid="bottom-input-bar">
+                    <div class="input-wrapper">
+                        <button class="input-action-btn" data-testid="attachment-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                        </button>
+                        <input type="text" placeholder="Message #general" disabled id="chat-input" data-testid="chat-input" />
+                        <div class="input-actions-right">
+                            <!-- Gift -->
+                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.06 5H19V3c0-1.1-.89-2-2-2H7C5.9 1 5 1.9 5 3v2H2.94C2.42 5 2 5.42 2 5.94v4.12C2 10.58 2.42 11 2.94 11H5v8c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-8h2.06c.52 0 .94-.42.94-.94V5.94c0-.52-.42-.94-.94-.94zM11 19H7v-8h4v8zm0-10H4V7h7v2zm2 10v-8h4v8h-4zm4-10h-7V7h7v2z"/></svg>
+                            <!-- Emoji -->
+                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM8.5 9.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5S7 11.83 7 11s.67-1.5 1.5-1.5zM12 17.5c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5zm3.5-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Audio Player Handles via JS -->
     <script src="app.js"></script>
 </body>
 </html>
