@@ -219,6 +219,11 @@ button { background: none; border: none; cursor: pointer; color: inherit; font-f
     to { opacity: 1; transform: translateY(0); }
 }
 
+.instant-mode * {
+    animation: none !important;
+    transition: none !important;
+}
+
 .message-avatar {
     width: 40px; height: 40px;
     border-radius: 50%;
