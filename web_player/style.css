@@ -74,20 +74,38 @@ button { background: none; border: none; cursor: pointer; color: inherit; font-f
     border-radius: 44px;
     box-shadow: 0 0 0 3px #222, 0 0 40px rgba(0,0,0,0.8);
 }
-/* Recording mode: fill entire viewport via scaling */
+/* Recording mode: Desktop Beluga Mode (1080p horizontal) */
 .recording-mode #viewport-wrapper {
     display: block;
+    background: var(--background-primary);
 }
 .recording-mode #discord-app {
     max-width: none; max-height: none;
     border-radius: 0; box-shadow: none;
-    width: 432px; height: 768px;
+    width: 1280px; height: 720px;
     aspect-ratio: unset;
     margin: 0;
-    transform: scale(2.5);
+    transform: scale(1.5);
     transform-origin: top left;
 }
-.recording-mode #status-bar { display: none; }
+.recording-mode #status-bar,
+.recording-mode #top-header,
+.recording-mode #bottom-input-bar { 
+    display: none; 
+}
+
+/* Beluga Desktop Enhancements */
+.recording-mode .welcome-header { display: none; }
+.recording-mode .message { padding: 4px 48px; margin-top: 24px; }
+.recording-mode .message-avatar { width: 56px; height: 56px; margin-right: 24px; }
+.recording-mode .message-username { font-size: 22px; }
+.recording-mode .message-timestamp { font-size: 16px; }
+.recording-mode .message-content { font-size: 20px; line-height: 1.4; }
+.recording-mode .message.compact { margin-top: 2px; }
+.recording-mode .message.compact .message-content { margin-left: 80px; }
+.recording-mode .reply-header { padding-left: 80px; font-size: 18px; }
+.recording-mode .reply-header img { width: 22px; height: 22px; }
+
 
 /* ═══════ iOS Status Bar ═══════ */
 #status-bar {
@@ -156,7 +174,6 @@ button { background: none; border: none; cursor: pointer; color: inherit; font-f
 }
 #messages-list { 
     padding: 8px 0; 
-    flex: 1; 
     display: flex; 
     flex-direction: column; 
 }

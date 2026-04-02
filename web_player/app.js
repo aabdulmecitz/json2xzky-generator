@@ -492,3 +492,60 @@ async function runSimulation() {
     if (!isInstant) console.log("SIMULATION_COMPLETE");
     window.__simulationDone = true;
 }
+
+window.renderUpToStep = function(stepIndex, jsonData) {
+    scenarioEntries = jsonData;
+    isInstant = true;
+    
+    // Clear DOM state
+    dom.messagesList.innerHTML = '';
+    lastMessageUser = null;
+    lastMessageTimeStr = null;
+    messageCache = {};
+    
+    document.body.classList.add('recording-mode');
+    document.body.classList.add('instant-mode');
+    dom.startOverlay.classList.add('hidden');
+    dom.typingIndicator.classList.add('hidden'); // default hidden
+    
+    for (let i = 0; i <= stepIndex && i < scenarioEntries.length; i++) {
+        const entry = scenarioEntries[i];
+        const action = entry.action;
+
+        if (!entry.user_id && entry.user) entry.user_id = entry.user;
+
+        if (action === 'switch_channel') {
+            dom.messagesList.innerHTML = '';
+        } else if (['message', 'send_message', 'reply', 'send_attachment', 'send_voice_note'].includes(action)) {
+            appendMessage(entry);
+        } else if (action === 'type_message' || action === 'typing') {
+            // Only show typing indicator if it is the EXACT frame we're pausing on
+            if (i === stepIndex) {
+                dom.typingText.textContent = `${entry.user_id} is typing...`;
+                dom.typingIndicator.classList.remove('hidden');
+            }
+        } else if (action === 'add_reaction') {
+            const reactionContainer = document.getElementById(`reactions_${entry.target_msg_id}`);
+            if (reactionContainer) {
+                const pill = document.createElement('div');
+                pill.className = 'reaction-pill';
+                pill.innerHTML = `<span>${entry.emoji}</span><span>${entry.count || 1}</span>`;
+                reactionContainer.appendChild(pill);
+            }
+        } else if (action === 'edit_message') {
+            const contentNode = document.getElementById(`content_${entry.target_msg_id}`);
+            if (contentNode) {
+                contentNode.innerHTML = formatMessage(entry.new_text) + '<span class="edited-stamp">(edited)</span>';
+            }
+        } else if (action === 'delete_message') {
+            const msgNode = document.getElementById(`msg_${entry.target_msg_id}`);
+            if (msgNode) msgNode.remove();
+        } else if (['join', 'leave', 'system_message'].includes(action)) {
+            appendSystemMessage(entry);
+        }
+    }
+    
+    // Force final height/layout render
+    scrollToBottom();
+    return true; // Finished synchronously
+};

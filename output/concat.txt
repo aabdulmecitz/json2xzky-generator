@@ -1,0 +1,3 @@
+file '/home/aabdulmecitz/t2bel/output/frames/frame_0000.png'
+duration 2.5
+file '/home/aabdulmecitz/t2bel/output/frames/frame_0000.png'
