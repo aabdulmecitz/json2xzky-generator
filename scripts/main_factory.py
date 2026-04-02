@@ -386,20 +386,25 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
     class QuietHandler(http.server.SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory=str(PROJECT_ROOT), **kwargs)
-        def log_message(self, *a):
-            pass  # Suppress noisy logs
-
-    server = http.server.HTTPServer(("127.0.0.1", 0), QuietHandler)
+    server = http.server.ThreadingHTTPServer(("0.0.0.0", 0), QuietHandler)
     port = server.server_address[1]
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     print(f"[ACTOR] 🌐 Local server on http://127.0.0.1:{port}")
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--disable-dev-shm-usage",
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-gpu"
+            ]
+        )
         context = browser.new_context(
-            viewport={"width": 432, "height": 768},
-            device_scale_factor=2.5,
+            viewport={"width": 1080, "height": 1920},
+            device_scale_factor=1,
             record_video_dir=str(raw_video_dir),
             record_video_size={"width": 1080, "height": 1920},
         )
@@ -429,7 +434,7 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
         # Navigate
         url = f"http://127.0.0.1:{port}/web_player/index.html"
         print(f"[ACTOR] 🎬 Navigating to {url}")
-        page.goto(url, wait_until="networkidle")
+        page.goto(url, wait_until="domcontentloaded", timeout=15000)
 
         # Read and inject the scenario JSON directly
         scenario_data = json_path.read_text(encoding="utf-8")
@@ -486,11 +491,11 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
                 groups.setdefault(cue["group_id"], []).append(cue)
                 
             context2 = browser.new_context(
-                viewport={"width": 432, "height": 768},
-                device_scale_factor=4.0
+                viewport={"width": 1080, "height": 1920},
+                device_scale_factor=3.0
             )
             page2 = context2.new_page()
-            page2.goto(url, wait_until="networkidle")
+            page2.goto(url, wait_until="domcontentloaded", timeout=15000)
             
             page2.evaluate(f"""
                 scenarioEntries = {scenario_data};
@@ -787,8 +792,7 @@ def _apply_zoom_crops(raw_video: str, camera_cues: list[dict]) -> str:
         t_end = t_start + ZOOM_DURATION
         
         # Crop coordinates (clamped to video bounds)
-        # Muxer extracts from physical pixels, so scale from CSS
-        scale_factor = 2.5
+        scale_factor = 1.0
         cx = max(0, bbox["x"] * scale_factor)
         cy = max(0, bbox["y"] * scale_factor)
         cw = max(100, bbox["width"] * scale_factor)

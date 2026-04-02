@@ -74,12 +74,18 @@ button { background: none; border: none; cursor: pointer; color: inherit; font-f
     border-radius: 44px;
     box-shadow: 0 0 0 3px #222, 0 0 40px rgba(0,0,0,0.8);
 }
-/* Recording mode: fill screen, keep 9:16 */
+/* Recording mode: fill entire viewport via scaling */
+.recording-mode #viewport-wrapper {
+    display: block;
+}
 .recording-mode #discord-app {
     max-width: none; max-height: none;
     border-radius: 0; box-shadow: none;
-    width: auto; height: 100vh;
-    aspect-ratio: 9/16;
+    width: 432px; height: 768px;
+    aspect-ratio: unset;
+    margin: 0;
+    transform: scale(2.5);
+    transform-origin: top left;
 }
 .recording-mode #status-bar { display: none; }
 
