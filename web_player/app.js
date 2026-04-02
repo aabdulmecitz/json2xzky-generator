@@ -255,6 +255,7 @@ function appendMessage(entry) {
     const div = document.createElement('div');
     div.id = `msg_${entry.id}`;
     div.className = 'message ' + (entry.has_ping ? 'has-ping ' : '') + (isGrouped ? 'compact' : '');
+    div.setAttribute('data-user', entry.user_id);
     
     if(entry.id) messageCache[entry.id] = entry;
 

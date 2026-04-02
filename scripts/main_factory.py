@@ -210,53 +210,83 @@ def record_simulation(json_path: Path):
             action = entry.get("action", "message")
             page.evaluate(f"window.renderUpToStep({i}, {json.dumps(scenario)})")
             
-            # Wait for all avatars to load
+            # Wait for all avatars to load (with failsafe)
             page.evaluate("""
                 () => new Promise(resolve => {
-                    if (document.images.length === 0) return resolve();
+                    const imgs = document.images;
+                    if (imgs.length === 0) return resolve();
                     let loaded = 0;
-                    for (let img of document.images) {
+                    let timeout = setTimeout(resolve, 1000);
+                    for (let img of imgs) {
                         if (img.complete) loaded++;
                         else {
-                            img.onload = () => { loaded++; if (loaded === document.images.length) resolve(); };
-                            img.onerror = () => { loaded++; if (loaded === document.images.length) resolve(); };
+                            img.addEventListener('load', () => { loaded++; if (loaded >= imgs.length) { clearTimeout(timeout); resolve(); }});
+                            img.addEventListener('error', () => { loaded++; if (loaded >= imgs.length) { clearTimeout(timeout); resolve(); }});
                         }
                     }
-                    if (loaded >= document.images.length) resolve();
+                    if (loaded >= imgs.length) { clearTimeout(timeout); resolve(); }
                 })
             """)
 
-            # Capture Dynamic Vertical Bounding Box
-            bbox = page.evaluate("""
-                () => {
+            current_user_id = entry.get("user_id") or entry.get("user", "")
+            is_system = action in ["join", "leave", "system_message"]
+            
+            # Capture Dynamic Vertical Bounding Box: ISOLATED TO ACTIVE SPEAKER
+            bbox = page.evaluate(f"""
+                () => {{
                     const list = document.getElementById('messages-list');
                     let minY = 99999, maxY = 0;
                     let found = false;
-                    for (const child of list.children) {
+                    
+                    const currentUser = {json.dumps(current_user_id)};
+                    const isSystem = {json.dumps(is_system)};
+                    
+                    const children = Array.from(list.children).filter(c => c.style.display !== 'none');
+                    let elementsToCrop = [];
+                    
+                    if (isSystem) {{
+                        if (children.length > 0) elementsToCrop.push(children[children.length-1]);
+                    }} else {{
+                        for (let k = children.length - 1; k >= 0; k--) {{
+                            const child = children[k];
+                            // skip welcome header
+                            if (child.id === 'welcome-header') continue;
+                            
+                            const childUser = child.getAttribute('data-user');
+                            if (childUser === currentUser) {{
+                                elementsToCrop.push(child);
+                            }} else {{
+                                if (elementsToCrop.length > 0) break;
+                            }}
+                        }}
+                    }}
+                    
+                    for (const child of elementsToCrop) {{
                         const rect = child.getBoundingClientRect();
-                        if (rect.width === 0 || rect.height === 0 || child.style.display === 'none') continue;
+                        if (rect.width === 0 || rect.height === 0) continue;
                         found = true;
                         if (rect.y < minY) minY = rect.y;
                         if (rect.bottom > maxY) maxY = rect.bottom;
-                    }
+                    }}
+                    
                     const typing = document.getElementById('typing-indicator');
-                    if (typing && !typing.classList.contains('hidden')) {
+                    if (typing && !typing.classList.contains('hidden')) {{
                         const rect = typing.getBoundingClientRect();
-                        if (rect.width > 0 && rect.height > 0) {
+                        if (rect.width > 0 && rect.height > 0) {{
                             found = true;
                             if (rect.y < minY) minY = rect.y;
                             if (rect.bottom > maxY) maxY = rect.bottom;
-                        }
-                    }
+                        }}
+                    }}
+                    
                     if (!found) return null;
-                    // Keep width exactly the viewport width (800) so it scales consistently
-                    return {
+                    return {{
                         x: 0,
                         y: Math.max(0, minY - 16),
                         width: 800,
                         height: (maxY - minY) + 32
-                    };
-                }
+                    }};
+                }}
             """)
 
             frame_path = FRAMES_DIR / f"frame_{i:04d}.png"
@@ -312,7 +342,7 @@ def mux_audio_video(frame_timeline, audio_timeline):
     subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30",
-        "-vf", "scale=1920:980:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:100:color=black", str(raw_vid)
+        "-vf", "scale=1920:980:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=0x313338", str(raw_vid)
     ], capture_output=True)
 
     final_vid = OUTPUT_DIR / "final_video.mp4"
@@ -359,7 +389,7 @@ def main():
 
     # Step 1: Brain
     if args.skip_parse:
-        scenario = json.loads(json_path.read_text())
+        scenario = json.loads(json_path.read_text(encoding="utf-8"))
     else:
         scenario = parse_text_to_json(args.input, str(json_path))
 

@@ -102,9 +102,9 @@ button { background: none; border: none; cursor: pointer; color: inherit; font-f
 .recording-mode .message-timestamp { font-size: 16px; }
 .recording-mode .message-content { font-size: 20px; line-height: 1.4; }
 .recording-mode .message.compact { margin-top: 2px; }
-.recording-mode .message.compact .message-content { margin-left: 80px; }
 .recording-mode .reply-header { padding-left: 80px; font-size: 18px; }
 .recording-mode .reply-header img { width: 22px; height: 22px; }
+.recording-mode #typing-indicator { padding: 8px 48px; font-size: 16px; }
 
 
 /* ═══════ iOS Status Bar ═══════ */
