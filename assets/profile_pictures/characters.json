@@ -1,7 +1,23 @@
 {
-    "Billy": {
-        "profile_pic": "perm/billy.jpeg",
+    "xzky": {
+        "profile_pic": "xzky_moustache.png",
+        "role_color": "#ff3838"
+    },
+    "sarah": {
+        "profile_pic": "sarah.png",
+        "role_color": "#ff85c2"
+    },
+    "billy": {
+        "profile_pic": "billy.png",
         "role_color": "#ffffff"
+    },
+    "billy_moustache": {
+        "profile_pic": "billy_moustache.png",
+        "role_color": "#ffffff"
+    },
+    "victor": {
+        "profile_pic": "victor.png",
+        "role_color": "#38b6ff"
     },
     "Pizza": {
         "profile_pic": "perm/pizza.jpeg",

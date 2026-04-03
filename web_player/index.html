@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Discord Mobile Sandbox</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -31,12 +32,9 @@
                 </div>
                 <div class="status-notch"></div>
                 <div class="status-right">
-                    <!-- Signal -->
-                    <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="9" width="3" height="3" rx="0.5" fill="white"/><rect x="4.5" y="6" width="3" height="6" rx="0.5" fill="white"/><rect x="9" y="3" width="3" height="9" rx="0.5" fill="white"/><rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="white"/></svg>
-                    <!-- WiFi -->
-                    <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="white"/><path d="M4.94 7.94a4.5 4.5 0 016.12 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M2.1 5.1a8 8 0 0111.8 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-                    <!-- Battery -->
-                    <svg width="27" height="12" viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="23" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="20" height="8" rx="1.5" fill="white"/><path d="M25 4v4a2 2 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><rect x="0" y="9" width="3" height="3" rx="0.75" fill="white"/><rect x="5" y="6" width="3" height="6" rx="0.75" fill="white"/><rect x="10" y="3" width="3" height="9" rx="0.75" fill="white"/><rect x="15" y="0" width="3" height="12" rx="0.75" fill="white"/></svg>
+                    <svg width="15" height="12" viewBox="0 0 16 12"><path d="M8 11.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="white"/><path d="M4.94 7.94a4.5 4.5 0 016.12 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M2.1 5.1a8 8 0 0111.8 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <svg width="25" height="12" viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="23" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="20" height="8" rx="1.5" fill="white"/><path d="M25 4v4a2 2 0 000-4z" fill="white" fill-opacity="0.4"/></svg>
                 </div>
             </div>
 
@@ -162,16 +160,14 @@
                         </button>
                         <div class="header-title" data-testid="header-title">
                             <span class="hash-icon-header">
-                              <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg>
+                              <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg>
                             </span>
                             general
                         </div>
                     </div>
                     <div class="header-right">
-                        <!-- Thread -->
-                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5.43 21a.997.997 0 01-.83-1.56l2.21-3.3A8.96 8.96 0 013 9c0-4.97 4.03-9 9-9s9 4.03 9 9-4.03 9-9 9a8.9 8.9 0 01-3-.52L5.43 21zM12 2C8.14 2 5 5.14 5 9s3.14 7 7 7a6.97 6.97 0 003.15-.76l.65-.32.32.65.7 1.44.85-1.28a.998.998 0 00-.05-.28C18.87 14.09 19 11.57 19 9c0-3.86-3.14-7-7-7z"/></svg>
-                        <!-- Members -->
-                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14.5 8a3 3 0 10-3-3 3 3 0 003 3zm0 2a5 5 0 115-5 5 5 0 01-5 5zm-7.5 8.5a3.5 3.5 0 013.5-3.5h8a3.5 3.5 0 013.5 3.5V20a1 1 0 01-1 1H8a1 1 0 01-1-1v-1.5zM9 5a3 3 0 100 6 3 3 0 000-6z"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5C17.2 2.5 21.5 6.8 21.5 12C21.5 17.2 17.2 21.5 12 21.5C10.4 21.5 8.9 21.1 7.5 20.3L2.5 21.5L3.7 16.5C2.9 15.1 2.5 13.6 2.5 12C2.5 6.8 6.8 2.5 12 2.5ZM12 4.5C7.9 4.5 4.5 7.9 4.5 12C4.5 13.4 4.9 14.7 5.6 15.8L4.1 18.9L7.2 17.4C8.3 18.1 9.6 18.5 11 18.5H12C16.1 18.5 19.5 15.1 19.5 11V12C19.5 7.9 16.1 4.5 12 4.5Z"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M14.5 8a3 3 0 10-3-3 3 3 0 003 3zm7.5 10.5a3.5 3.5 0 00-3.5-3.5h-8a3.5 3.5 0 00-3.5 3.5V20a1 1 0 001 1h12a1 1 0 001-1v-1.5zM6 8a3 3 0 100 6 3 3 0 000-6z"/></svg>
                     </div>
                 </header>
 
@@ -209,14 +205,11 @@
                 <div id="bottom-input-bar" data-testid="bottom-input-bar">
                     <div class="input-wrapper">
                         <button class="input-action-btn" data-testid="attachment-btn">
-                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
                         </button>
                         <input type="text" placeholder="Message #general" disabled id="chat-input" data-testid="chat-input" />
                         <div class="input-actions-right">
-                            <!-- Gift -->
-                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.06 5H19V3c0-1.1-.89-2-2-2H7C5.9 1 5 1.9 5 3v2H2.94C2.42 5 2 5.42 2 5.94v4.12C2 10.58 2.42 11 2.94 11H5v8c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-8h2.06c.52 0 .94-.42.94-.94V5.94c0-.52-.42-.94-.94-.94zM11 19H7v-8h4v8zm0-10H4V7h7v2zm2 10v-8h4v8h-4zm4-10h-7V7h7v2z"/></svg>
-                            <!-- Emoji -->
-                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM8.5 9.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5S7 11.83 7 11s.67-1.5 1.5-1.5zM12 17.5c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5zm3.5-5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.5 17.25h-11L12 6.75l5.5 10.5z" opacity="0"/><path fill="currentColor" d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12zm6.5-2.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5S7 11.83 7 11s.67-1.5 1.5-1.5zm7 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM12 17.5c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z"/></svg>
                         </div>
                     </div>
                 </div>
@@ -224,6 +217,6 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=4"></script>
 </body>
 </html>

@@ -60,7 +60,7 @@ fetch('../assets/config.json')
         if(serverHeader) serverHeader.innerHTML = `<span>${appConfig.serverName}</span><svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>`;
         
         const headerTitle = document.querySelector('.header-title');
-        if(headerTitle) headerTitle.innerHTML = `<span class="hash-icon-header"><svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg></span>${appConfig.channelName}`;
+        if(headerTitle) headerTitle.innerHTML = `<span class="hash-icon-header"><svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5.88657 21C5.57547 21 5.3399 20.7189 5.39427 20.4126L6.00001 17H2.59511C2.28449 17 2.04905 16.7198 2.10259 16.4138L2.27759 15.4138C2.31946 15.1746 2.52722 15 2.77011 15H6.35001L7.41001 9H4.00511C3.69449 9 3.45905 8.71977 3.51259 8.41381L3.68759 7.41381C3.72946 7.17456 3.93722 7 4.18011 7H7.76001L8.39677 3.41262C8.43914 3.17391 8.64664 3 8.88907 3H9.87344C10.1845 3 10.4201 3.28107 10.3657 3.58738L9.76001 7H15.76L16.3968 3.41262C16.4391 3.17391 16.6466 3 16.8891 3H17.8734C18.1845 3 18.4201 3.28107 18.3657 3.58738L17.76 7H21.1649C21.4755 7 21.7109 7.28023 21.6574 7.58619L21.4824 8.58619C21.4405 8.82544 21.2328 9 20.9899 9H17.41L16.35 15H19.7549C20.0655 15 20.3009 15.2802 20.2474 15.5862L20.0724 16.5862C20.0305 16.8254 19.8228 17 19.5799 17H16L15.3632 20.5874C15.3209 20.8261 15.1134 21 14.8709 21H13.8866C13.5755 21 13.3399 20.7189 13.3943 20.4126L14 17H8.00001L7.36323 20.5874C7.32086 20.8261 7.11336 21 6.87093 21H5.88657ZM9.41045 9L8.35045 15H14.3504L15.4104 9H9.41045Z"/></svg></span>${appConfig.channelName}`;
         
         // Update welcome header
         const welcomeH1 = document.querySelector('.welcome-header h1');
@@ -136,7 +136,7 @@ dom.startBtn.addEventListener('click', async () => {
 dom.instantBtn.addEventListener('click', async () => {
     isInstant = true;
     dom.startOverlay.classList.add('hidden');
-    document.body.classList.add('recording-mode');
+    // Don't add 'recording-mode' here so the browser window stays scrollable!
     document.body.classList.add('instant-mode');
     runSimulation();
 });
@@ -214,17 +214,39 @@ function formatMessage(text) {
     return html;
 }
 
+function applyTwemoji(element) {
+    if (typeof twemoji !== 'undefined' && element) {
+        twemoji.parse(element, { base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/', folder: 'svg', ext: '.svg' });
+    }
+}
+
+const DISCORD_DEFAULT_COLORS = ['#5865f2', '#57f287', '#b9bbbe', '#ed4245', '#fee75c'];
+
+// Returns a data-URI or real URL for a user/caller avatar.
+// Falls back to a coloured initial-letter SVG so it never crashes.
 function getAvatarUrl(userId) {
+    if (!userId) return '';
     if (charactersDict[userId] && charactersDict[userId].profile_pic) {
         return `../assets/profile_pictures/${charactersDict[userId].profile_pic}`;
     }
+    // Generate a tiny SVG data-URI as fallback
     const hash = userId.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0);
-    const index = Math.abs(hash) % 6;
-    return `https://cdn.discordapp.com/embed/avatars/${index}.png`;
+    const color = DISCORD_DEFAULT_COLORS[Math.abs(hash) % DISCORD_DEFAULT_COLORS.length];
+    const initial = userId[0].toUpperCase();
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect width='40' height='40' rx='20' fill='${color}'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='20' font-family='sans-serif' fill='white'>${initial}</text></svg>`;
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function getAvatarHtml(userId, addClass="", baseClass="message-avatar") {
+    const avatarSrc = getAvatarUrl(userId);
+    return `<img class="${baseClass} ${addClass}" src="${avatarSrc}" onerror="this.onerror=null; this.src='../assets/profile_pictures/default.png';">`;
 }
 
 function getColor(userId) {
-    return (charactersDict[userId] && charactersDict[userId].role_color) ? charactersDict[userId].role_color : '#fff';
+    if (charactersDict[userId] && charactersDict[userId].role_color) {
+        return charactersDict[userId].role_color;
+    }
+    return '#fff';
 }
 
 function getCurrentTimeStr() {
@@ -266,8 +288,8 @@ function appendMessage(entry) {
         replyHeader.className = 'reply-header';
         
         replyHeader.innerHTML = `
-            <img src="${getAvatarUrl(replyTarget.user_id)}" onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
-            <span style="color: ${getColor(replyTarget.user_id)}; font-weight: 600;">${replyTarget.user_id}</span>
+            ${getAvatarHtml(replyTarget.user_id, "reply-avatar", "reply-avatar-base")}
+            <span style="color: ${getColor(replyTarget.user_id)}; font-weight: 500;">${replyTarget.user_id.replace('_moustache', '')}</span>
             <span class="reply-preview">${formatMessage(replyTarget.message_content || replyTarget.text)}</span>
         `;
         div.appendChild(replyHeader);
@@ -279,14 +301,17 @@ function appendMessage(entry) {
     wrapper.className = 'message-content-wrapper';
     
     let html = `
-        <img class="message-avatar" src="${getAvatarUrl(entry.user_id)}" onerror="this.onerror=null; this.src='https://cdn.discordapp.com/embed/avatars/0.png';">
+        ${getAvatarHtml(entry.user_id)}
         <div class="message-body">
     `;
     
     if (!isGrouped || entry.reply_to_id || entry.action === 'reply') {
+        const isReplyMsg = entry.reply_to_id || entry.action === 'reply';
+        const repliedSpan = isReplyMsg ? `<span class="message-replied-text">replied</span>` : ``;
         html += `
             <div class="message-header">
-                <span class="message-username" style="color: ${getColor(entry.user_id)}">${entry.user_id}</span>
+                <span class="message-username" style="color: ${getColor(entry.user_id)}">${entry.user_id.replace('_moustache', '')}</span>
+                ${repliedSpan}
                 <span class="message-timestamp">${getCurrentTimeStr()}</span>
             </div>
         `;
@@ -320,6 +345,7 @@ function appendMessage(entry) {
     wrapper.innerHTML = html;
     div.appendChild(wrapper);
     dom.messagesList.appendChild(div);
+    applyTwemoji(div);
     
     if (!isInstant) {
         playSound(audioBuffers.ping, 'message');
@@ -349,6 +375,7 @@ function appendSystemMessage(entry) {
     `;
 
     dom.messagesList.appendChild(div);
+    applyTwemoji(div);
     if (!isInstant) playSound(audioBuffers.ping, 'message');
     scrollToBottom();
 }
@@ -435,12 +462,14 @@ async function runSimulation() {
                 pill.className = 'reaction-pill';
                 pill.innerHTML = `<span>${entry.emoji}</span><span>${entry.count || 1}</span>`;
                 reactionContainer.appendChild(pill);
+                applyTwemoji(pill);
                 if (!isInstant) playUserSound('reaction');
             }
         } else if (action === 'edit_message') {
             const contentNode = document.getElementById(`content_${entry.target_msg_id}`);
             if (contentNode) {
                 contentNode.innerHTML = formatMessage(entry.new_text) + '<span class="edited-stamp">(edited)</span>';
+                applyTwemoji(contentNode);
             }
         } else if (action === 'delete_message') {
             const msgNode = document.getElementById(`msg_${entry.target_msg_id}`);
@@ -460,25 +489,39 @@ async function runSimulation() {
         } else if (['join', 'leave', 'system_message'].includes(action)) {
             appendSystemMessage(entry);
         } else if (action === 'open_profile') {
-            dom.profileAvatar.src = getAvatarUrl(entry.target_user);
-            dom.profileName.textContent = entry.target_user;
-            dom.profileOverlay.classList.add('open');
-            if(!isInstant) playUserSound('pop');
+            if (!isInstant) {
+                const profileUrl = getAvatarUrl(entry.target_user || entry.user_id);
+                if (dom.profileAvatar) dom.profileAvatar.src = profileUrl;
+                if (dom.profileName) dom.profileName.textContent = entry.target_user || entry.user_id;
+                if (dom.profileOverlay) dom.profileOverlay.classList.add('open');
+                playUserSound('pop');
+                const pSec = entry.pause_after || entry.duration || 3;
+                setTimeout(() => { if (dom.profileOverlay) dom.profileOverlay.classList.remove('open'); }, pSec * 1000);
+            }
         } else if (action === 'push_notification') {
-            dom.pushTitle.textContent = entry.title;
-            dom.pushText.textContent = entry.body;
-            dom.pushNotification.classList.add('show');
-            if(!isInstant) playUserSound('discord_ping');
-            setTimeout(() => dom.pushNotification.classList.remove('show'), 4000);
+            if (!isInstant) {
+                if (dom.pushTitle) dom.pushTitle.textContent = entry.title || '';
+                if (dom.pushText) dom.pushText.textContent = entry.body || '';
+                if (dom.pushNotification) dom.pushNotification.classList.add('show');
+                playUserSound('discord_ping');
+                setTimeout(() => { if (dom.pushNotification) dom.pushNotification.classList.remove('show'); }, 4000);
+            }
         } else if (action === 'incoming_call') {
-            dom.callAvatar.src = getAvatarUrl(entry.caller);
-            dom.callName.textContent = entry.caller;
-            dom.incomingCall.classList.add('active');
-            if(!isInstant) playUserSound('discord_ringtone');
+            if (!isInstant) {
+                const callerUrl = getAvatarUrl(entry.caller || entry.user_id);
+                if (dom.callAvatar) dom.callAvatar.src = callerUrl;
+                if (dom.callName) dom.callName.textContent = entry.caller || entry.user_id;
+                dom.incomingCall.classList.add('active');
+                playUserSound('discord_ringtone');
+                const cSec = entry.pause_after || entry.duration || 5;
+                setTimeout(() => dom.incomingCall.classList.remove('active'), cSec * 1000);
+            }
         } else if (action === 'join_call') {
-            dom.incomingCall.classList.remove('active');
-            dom.connectedBanner.classList.add('active');
-            if(!isInstant) playUserSound('join_call');
+            if (!isInstant) {
+                dom.incomingCall.classList.remove('active');
+                dom.connectedBanner.classList.add('active');
+                playUserSound('join_call');
+            }
         } else if (action === 'toggle_mute') {
             if(!isInstant) playUserSound(entry.state ? 'mute_ping' : 'unmute');
         }

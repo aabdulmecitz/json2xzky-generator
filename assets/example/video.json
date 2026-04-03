@@ -1,0 +1,539 @@
+[
+  {
+    "id": 1,
+    "action": "join",
+    "user_id": "xzky",
+    "message_content": "",
+    "pause_after": 1.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 2,
+    "action": "typing",
+    "user_id": "xzky",
+    "duration": 2.0
+  },
+  {
+    "id": 3,
+    "action": "message",
+    "user_id": "xzky",
+    "message_content": "rate my new look guys. went to 42.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 4,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 1.5
+  },
+  {
+    "id": 5,
+    "action": "message",
+    "user_id": "sarah",
+    "message_content": "ew wtf is that on ur face",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 1.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 6,
+    "action": "typing",
+    "user_id": "billy",
+    "duration": 2.5
+  },
+  {
+    "id": 7,
+    "action": "message",
+    "user_id": "billy",
+    "message_content": "mr xzky did u eat a hairy caterpillar?",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 8,
+    "action": "typing",
+    "user_id": "xzky",
+    "duration": 1.5
+  },
+  {
+    "id": 9,
+    "action": "reply",
+    "user_id": "xzky",
+    "message_content": "its a mustache billy. fashion.",
+    "reply_to_id": 7,
+    "has_ping": true,
+    "zoom": false,
+    "pause_after": 2.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 10,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 5.0
+  },
+  {
+    "id": 11,
+    "action": "message",
+    "user_id": "victor",
+    "message_content": "beta facial hair. i grew a full beard in the womb.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 12,
+    "action": "typing",
+    "user_id": "billy",
+    "duration": 2.5
+  },
+  {
+    "id": 13,
+    "action": "message",
+    "user_id": "billy",
+    "message_content": "mr xzky ur mustache looks like a barcode. can i scan it?",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 14,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 2.5
+  },
+  {
+    "id": 15,
+    "action": "message",
+    "user_id": "sarah",
+    "message_content": "wait... im scanning it with my premium gucci app.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 4.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 16,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 1.0
+  },
+  {
+    "id": 17,
+    "action": "reply",
+    "user_id": "sarah",
+    "message_content": "omg it scanned.",
+    "reply_to_id": 13,
+    "has_ping": true,
+    "zoom": true,
+    "pause_after": 2.0,
+    "sound_query": null,
+    "sound": "vine_boom"
+  },
+  {
+    "id": 18,
+    "action": "typing",
+    "user_id": "xzky",
+    "duration": 1.5
+  },
+  {
+    "id": 19,
+    "action": "message",
+    "user_id": "xzky",
+    "message_content": "wat did it say",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 1.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 20,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 2.5
+  },
+  {
+    "id": 21,
+    "action": "reply",
+    "user_id": "sarah",
+    "message_content": "cheap canned beans - $0.50. ew. ur officially poor.",
+    "reply_to_id": 19,
+    "has_ping": true,
+    "zoom": true,
+    "pause_after": 2.0,
+    "sound_query": null,
+    "sound": "vine_boom"
+  },
+  {
+    "id": 22,
+    "action": "add_reaction",
+    "user_id": "victor",
+    "target_msg_id": 21,
+    "emoji": "💀",
+    "pause_after": 1.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 23,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 3.0
+  },
+  {
+    "id": 24,
+    "action": "message",
+    "user_id": "victor",
+    "message_content": "hahaha bean boy. real alphas scan as wagyu beef.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 3.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 25,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 2.0
+  },
+  {
+    "id": 26,
+    "action": "message",
+    "user_id": "sarah",
+    "message_content": "wait. why is my app glitching.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 27,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 2.5
+  },
+  {
+    "id": 28,
+    "action": "message",
+    "user_id": "sarah",
+    "message_content": "omg. ur barcode is auto-purchasing the beans.",
+    "has_ping": false,
+    "zoom": true,
+    "pause_after": 1.5,
+    "sound_query": null,
+    "sound": "siren"
+  },
+  {
+    "id": 29,
+    "action": "typing",
+    "user_id": "xzky",
+    "duration": 1.5
+  },
+  {
+    "id": 30,
+    "action": "message",
+    "user_id": "xzky",
+    "message_content": "wat. stop it.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 1.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 31,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 3.0
+  },
+  {
+    "id": 32,
+    "action": "message",
+    "user_id": "sarah",
+    "message_content": "I CANT. IT BOUGHT 500 CANS. MY DADS CREDIT CARD IS DRAINING.",
+    "has_ping": false,
+    "zoom": true,
+    "pause_after": 2.5,
+    "sound_query": null,
+    "sound": "error"
+  },
+  {
+    "id": 33,
+    "action": "incoming_call",
+    "user_id": "sarah",
+    "caller": "My Dad (ANGRY)",
+    "pause_after": 6.0,
+    "sound_query": null,
+    "sound": "iphone_ringtone"
+  },
+  {
+    "id": 34,
+    "action": "typing",
+    "user_id": "sarah",
+    "duration": 1.5
+  },
+  {
+    "id": 35,
+    "action": "message",
+    "user_id": "sarah",
+    "message_content": "HES DISOWNING ME. I HATE U XZKY.",
+    "has_ping": false,
+    "zoom": true,
+    "pause_after": 3.0,
+    "sound_query": null,
+    "sound": "vine_boom"
+  },
+  {
+    "id": 36,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 4.0
+  },
+  {
+    "id": 37,
+    "action": "message",
+    "user_id": "victor",
+    "message_content": "pathetic. hiding behind beans. watch this.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 38,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 3.5
+  },
+  {
+    "id": 39,
+    "action": "message",
+    "user_id": "victor",
+    "message_content": "im sending a pic of my jawline to assert dominance over the algorithm.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 1.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 40,
+    "action": "send_voice_note",
+    "user_id": "victor",
+    "duration": 5.0,
+    "pause_after": 6.0,
+    "sound_query": null,
+    "sound": "sigma_male_grindset"
+  },
+  {
+    "id": 41,
+    "action": "typing",
+    "user_id": "billy",
+    "duration": 3.0
+  },
+  {
+    "id": 42,
+    "action": "message",
+    "user_id": "billy",
+    "message_content": "wow mr victor... ur jawline scanned too!",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 43,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 2.0
+  },
+  {
+    "id": 44,
+    "action": "reply",
+    "user_id": "victor",
+    "message_content": "of course. it probably scanned as a bugatti.",
+    "reply_to_id": 42,
+    "has_ping": true,
+    "zoom": false,
+    "pause_after": 2.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 45,
+    "action": "typing",
+    "user_id": "billy",
+    "duration": 3.0
+  },
+  {
+    "id": 46,
+    "action": "reply",
+    "user_id": "billy",
+    "message_content": "no it says 'discount baby wipes - $0.10'",
+    "reply_to_id": 44,
+    "has_ping": true,
+    "zoom": true,
+    "pause_after": 3.0,
+    "sound_query": null,
+    "sound": "bruh"
+  },
+  {
+    "id": 47,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 6.0
+  },
+  {
+    "id": 48,
+    "action": "message",
+    "user_id": "victor",
+    "message_content": "DELETE THAT BILLY. THATS A GLITCH IN THE MATRIX.",
+    "has_ping": false,
+    "zoom": true,
+    "pause_after": 1.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 49,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 2.5
+  },
+  {
+    "id": 50,
+    "action": "message",
+    "user_id": "victor",
+    "message_content": "MY TESTOSTERONE IS TOO HIGH FOR THE APP.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 51,
+    "action": "add_reaction",
+    "user_id": "xzky",
+    "target_msg_id": 50,
+    "emoji": "🤡",
+    "pause_after": 1.5,
+    "sound": "pop"
+  },
+  {
+    "id": 52,
+    "action": "typing",
+    "user_id": "xzky",
+    "duration": 2.0
+  },
+  {
+    "id": 53,
+    "action": "message",
+    "user_id": "xzky",
+    "message_content": "hahaha baby wipes boy.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 3.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 54,
+    "action": "typing",
+    "user_id": "billy",
+    "duration": 4.0
+  },
+  {
+    "id": 55,
+    "action": "message",
+    "user_id": "billy",
+    "message_content": "guys... the beans arrived at my house.",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 56,
+    "action": "typing",
+    "user_id": "xzky",
+    "duration": 1.5
+  },
+  {
+    "id": 57,
+    "action": "message",
+    "user_id": "xzky",
+    "message_content": "wat? why ur house?",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.0,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 58,
+    "action": "typing",
+    "user_id": "billy",
+    "duration": 3.5
+  },
+  {
+    "id": 59,
+    "action": "message",
+    "user_id": "billy_moustache",
+    "message_content": "i printed mr xzky's mustache and glued it to my face! we are twins!",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 2.5,
+    "sound": "discord_ping"
+  },
+  {
+    "id": 60,
+    "action": "typing",
+    "user_id": "xzky",
+    "duration": 1.5
+  },
+  {
+    "id": 61,
+    "action": "message",
+    "user_id": "xzky",
+    "message_content": "BILLY NO TAKE IT OFF",
+    "has_ping": false,
+    "zoom": true,
+    "pause_after": 2.0,
+    "sound_query": null,
+    "sound": "vine_boom"
+  },
+  {
+    "id": 63,
+    "action": "typing",
+    "user_id": "billy_moustache",
+    "duration": 3.0
+  },
+  {
+    "id": 64,
+    "action": "message",
+    "user_id": "billy_moustache",
+    "message_content": "im drowning in beans mr xzky... help...",
+    "has_ping": false,
+    "zoom": true,
+    "pause_after": 3.0,
+    "sound_query": null,
+    "sound": "bass_drop"
+  },
+  {
+    "id": 65,
+    "action": "typing",
+    "user_id": "victor",
+    "duration": 3.0
+  },
+  {
+    "id": 66,
+    "action": "message",
+    "user_id": "victor",
+    "message_content": "at least u didnt scan as baby wipes...",
+    "has_ping": false,
+    "zoom": false,
+    "pause_after": 4.0,
+    "sound": "discord_ping"
+  }
+]

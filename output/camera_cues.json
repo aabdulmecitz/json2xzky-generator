@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 17,
+    "timestamp": 37.028,
+    "bbox": {
+      "x": 0,
+      "y": 1472,
+      "width": 1080,
+      "height": 248
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_17.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 21,
+    "timestamp": 44.543,
+    "bbox": {
+      "x": 0,
+      "y": 1472,
+      "width": 1080,
+      "height": 248
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_21.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 28,
+    "timestamp": 60.573,
+    "bbox": {
+      "x": 0,
+      "y": 1595,
+      "width": 1080,
+      "height": 125
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_28.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 32,
+    "timestamp": 68.087,
+    "bbox": {
+      "x": 0,
+      "y": 1477,
+      "width": 1080,
+      "height": 243
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_32.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 35,
+    "timestamp": 78.105,
+    "bbox": {
+      "x": 0,
+      "y": 1595,
+      "width": 1080,
+      "height": 125
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_35.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 46,
+    "timestamp": 110.631,
+    "bbox": {
+      "x": 0,
+      "y": 1472,
+      "width": 1080,
+      "height": 248
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_46.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 48,
+    "timestamp": 119.637,
+    "bbox": {
+      "x": 0,
+      "y": 1477,
+      "width": 1080,
+      "height": 243
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_48.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 61,
+    "timestamp": 149.66,
+    "bbox": {
+      "x": 0,
+      "y": 1533,
+      "width": 1080,
+      "height": 188
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_61.png"
+  },
+  {
+    "type": "ZOOM_CUE",
+    "msg_id": 64,
+    "timestamp": 159.674,
+    "bbox": {
+      "x": 0,
+      "y": 1533,
+      "width": 1080,
+      "height": 188
+    },
+    "screenshot": "/home/aabdulmecitz/t2bel/output/zooms/msg_64.png"
+  }
+]
