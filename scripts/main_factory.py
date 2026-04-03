@@ -468,6 +468,14 @@ def record_simulation(json_file: str) -> tuple[str, list[dict], list[dict]]:
         # Give some extra time for the last animation to finish
         page.wait_for_timeout(2000)
 
+        # ── Hide overlays before taking screenshot so they don't block messages ──────
+        page.evaluate("""
+            const c = document.getElementById('incoming-call');
+            if(c) c.style.display = 'none';
+            const p = document.getElementById('profile-overlay');
+            if(p) p.style.display = 'none';
+        """)
+
         # ── Beluga Camera: take element screenshots for zoom cues ──────
         if camera_cues:
             print(f"[ACTOR] 📸 Capturing {len(camera_cues)} zoom screenshots...")
@@ -745,28 +753,43 @@ def mux_audio_video(
 
     filter_complex = ";".join(filter_parts)
 
-    final_path = str(OUTPUT_DIR / "final_video.mp4")
+    final_path = str(OUTPUT_DIR / "final_horizontal.mp4")
     cmd.extend([
         "-filter_complex", filter_complex,
         "-map", "0:v",
         "-map", "[aout]",
-        "-c:v", "copy",
+        "-c:v", "libx264", "-preset", "fast",
         "-c:a", "aac",
         "-b:a", "192k",
         "-shortest",
         final_path,
     ])
 
-    print(f"[MUXER] 🔧 Running FFmpeg...")
+    print(f"[MUXER] 🔧 Running FFmpeg (Horizontal)...")
     result = subprocess.run(cmd, capture_output=True, text=True)
+
+    # ── Vertical Version Mux ──────────────────────────────────────────
+    vertical_path = str(OUTPUT_DIR / "final_vertical.mp4")
+    v_cmd = ["ffmpeg", "-y", "-i", str(raw_video)]
+    for ev in valid_events:
+        v_cmd.extend(["-i", ev["file"]])
+    v_cmd.extend([
+        "-filter_complex", filter_complex,
+        "-map", "0:v",
+        "-map", "[aout]",
+        "-c:v", "copy", "-c:a", "aac", "-shortest",
+        vertical_path
+    ])
+    print(f"[MUXER] 🔧 Running FFmpeg (Vertical)...")
+    subprocess.run(v_cmd, capture_output=True, text=True)
 
     if result.returncode != 0:
         print(f"[MUXER] ❌ FFmpeg error:\n{result.stderr[-500:]}")
-        import shutil
-        shutil.copy2(zoomed_video, final_path)
-        print("[MUXER] ⚠️  Copied video as fallback")
+        return zoomed_video
     else:
-        print(f"[MUXER] ✅ Final video → {final_path}")
+        print(f"[MUXER] ✅ Final Horizontal → {final_path}")
+        print(f"[MUXER] ✅ Final Vertical → {vertical_path}")
+        return final_path
 
     return final_path
 
@@ -784,45 +807,57 @@ def _apply_zoom_crops(raw_video: str, camera_cues: list[dict]) -> str:
     # then use overlay with enable='between(t,start,end)'
     
     filter_parts = []
-    overlay_chain = "[0:v]"
+    
+    # Pad base video to 1920x1080 (Widescreen)
+    filter_parts.append(
+        "[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,"
+        "pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black[bg]"
+    )
+    overlay_chain = "[bg]"
+    inputs = []
     
     for i, cue in enumerate(camera_cues):
-        bbox = cue["bbox"]
+        if "screenshot" not in cue: continue
+        
+        inputs.append(cue["screenshot"])
         t_start = cue["timestamp"]
         t_end = t_start + ZOOM_DURATION
-        
-        # Crop coordinates (clamped to video bounds)
-        scale_factor = 1.0
-        cx = max(0, bbox["x"] * scale_factor)
-        cy = max(0, bbox["y"] * scale_factor)
-        cw = max(100, bbox["width"] * scale_factor)
-        ch = max(100, bbox["height"] * scale_factor)
-        
-        # Add padding around the message for cinematic feel
-        pad = 40 * scale_factor
-        cx = max(0, cx - pad)
-        cy = max(0, cy - pad)
-        cw = cw + pad * 2
-        ch = ch + pad * 2
-        
-        # Crop from the source video, then scale to fill 1080x1920
+        img_idx = i + 1  # 0 is the raw video
+
+        # Scale the high-res "box" to fill the 1920x1080 screen nicely
         filter_parts.append(
-            f"[0:v]crop={cw}:{ch}:{cx}:{cy},"
-            f"scale=1080:1920:force_original_aspect_ratio=increase,"
-            f"crop=1080:1920[zoom{i}]"
+            f"[{img_idx}:v]scale=1920:1080:force_original_aspect_ratio=decrease,"
+            f"pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black[zoom_img_{i}]"
         )
-        
-        # Overlay the zoomed crop onto the main stream, enabled only during the zoom window
         filter_parts.append(
-            f"{overlay_chain}[zoom{i}]overlay=0:0:enable='between(t,{t_start:.2f},{t_end:.2f})'[v{i}]"
+            f"{overlay_chain}[zoom_img_{i}]overlay=0:0:enable='between(t,{t_start:.2f},{t_end:.2f})'[v{i}]"
         )
         overlay_chain = f"[v{i}]"
     
+    filter_complex = ";".join(filter_parts)
+    zoomed_path = str(OUTPUT_DIR / "zoomed_video.mp4")
+    
+    cmd = ["ffmpeg", "-y", "-i", raw_video]
+    for img in inputs:
+        cmd.extend(["-loop", "1", "-t", "60", "-i", img])
+        
+    cmd.extend([
+        "-filter_complex", filter_complex,
+        "-map", overlay_chain,
+        "-c:v", "libx264", "-preset", "fast",
+        "-pix_fmt", "yuv420p",
+        zoomed_path,
+    ])
+    
+    print(f"[MUXER] 🎯 Running high-fidelity zoom overlays...")    
     # Final output label
     filter_complex = ";".join(filter_parts)
     
     zoomed_path = str(OUTPUT_DIR / "zoomed_video.mp4")
-    # -map with the final labeled stream output (e.g. "[v2]")
+    # -map with the final labeled stream output (e.g. "[v2]" or "[bg]")
+    if not camera_cues:
+        overlay_chain = "[bg]"
+    
     cmd = [
         "ffmpeg", "-y", "-i", raw_video,
         "-filter_complex", filter_complex,
@@ -854,7 +889,13 @@ def _apply_sequential_reveals(raw_video: str, reveal_cues: list[dict]) -> str:
         return raw_video
 
     filter_parts = []
-    overlay_chain = "[0:v]"
+    
+    # Pad base video to 1920x1080 so that sequential reveals have a horizontal base background
+    filter_parts.append(
+        "[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,"
+        "pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black[bg]"
+    )
+    overlay_chain = "[bg]"
     inputs = []
     
     for i, cue in enumerate(reveal_cues):
@@ -865,8 +906,8 @@ def _apply_sequential_reveals(raw_video: str, reveal_cues: list[dict]) -> str:
 
         # Use force_original_aspect_ratio=decrease and pad with black borders
         filter_parts.append(
-            f"[{img_in}:v]scale=1080:1920:force_original_aspect_ratio=decrease,"
-            f"pad=1080:1920:(ow-iw)/2:(oh-ih)/2:color=black[rev_{i}]"
+            f"[{img_in}:v]scale=1920:1080:force_original_aspect_ratio=decrease,"
+            f"pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black[rev_{i}]"
         )
         filter_parts.append(
             f"{overlay_chain}[rev_{i}]overlay=0:0:enable='between(t,{t_start:.2f},{t_end:.2f})'[v{i}]"
